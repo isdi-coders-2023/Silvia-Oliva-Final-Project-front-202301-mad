@@ -1,4 +1,3 @@
-import React from "react";
 import { AppRouter } from "../app-router/app-router";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
@@ -11,7 +10,7 @@ export type MenuOption = {
 };
 export const menuOptions: MenuOption[] = [
   { label: "Home", path: "/home" },
-  { label: "Profile", path: "/profile" },
+  { label: "Start", path: "/start" },
 ];
 
 export function App() {
