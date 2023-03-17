@@ -9,8 +9,8 @@ export type MenuOption = {
   image?: string;
 };
 export const menuOptions: MenuOption[] = [
-  { label: "Home", path: "/home" },
   { label: "Start", path: "/start" },
+  { label: "Gallery", path: "/gallery" },
 ];
 
 export function App() {

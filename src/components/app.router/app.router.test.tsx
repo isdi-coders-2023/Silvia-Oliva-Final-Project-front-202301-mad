@@ -8,20 +8,20 @@ import { AppRouter } from "./app.router";
 describe("Given the app router component", () => {
   const mockOptions: MenuOption[] = [
     { label: "Home", path: "/home" },
-    { label: "Start", path: "/start" },
+    { label: "Gallery", path: "/gallery" },
   ];
 
   const mockRouterFunctions = (num: number) => {
     render(
       <Provider store={store}>
-        <Router initialEntries={["/home", "/start"]} initialIndex={num}>
+        <Router initialEntries={["/home", "/gallery"]} initialIndex={num}>
           <AppRouter menuOptions={mockOptions}></AppRouter>
         </Router>
       </Provider>
     );
   };
 
-  describe("when the route is HOME", () => {
+  describe("when the route is Home", () => {
     test("then it should go to /home and render it", async () => {
       await waitFor(async () => mockRouterFunctions(0));
       const element = await screen.findByRole("heading", {
@@ -30,7 +30,7 @@ describe("Given the app router component", () => {
       expect(element).toBeInTheDocument();
     });
   });
-  describe("when the route is PROFILE", () => {
+  describe("when the route is Gallery", () => {
     test("then it should go to /profile and render it", async () => {
       await waitFor(async () => mockRouterFunctions(1));
       const element = await screen.findByRole("heading");
