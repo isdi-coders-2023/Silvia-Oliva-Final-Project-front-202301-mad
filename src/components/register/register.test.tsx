@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { useUsers } from "../../hooks/use.users";
 import { UsersRepo } from "../../services/user.repo";
 import { store } from "../../store/store";
-import { Register } from "./register";
+import Register from "./register";
 
 jest.mock("../../hooks/use.users");
 
@@ -26,7 +26,7 @@ describe("Given the register function", () => {
     });
   });
 
-  describe("when the regsiter component is rendered", () => {
+  describe("when the register component is rendered", () => {
     test("then it should get the texbox elements in the document(username, email, passwd)", () => {
       const element = screen.getAllByRole("textbox");
       expect(element[0]).toBeInTheDocument();
