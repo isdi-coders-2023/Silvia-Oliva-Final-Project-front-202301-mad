@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
+import { Link } from "react-router-dom";
 import { useUsers } from "../../hooks/use.users";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
 
-export function Register() {
+export default function Register() {
   const repo = useMemo(() => new UsersRepo(), []);
 
   const { userRegister } = useUsers(repo);
@@ -12,27 +13,33 @@ export function Register() {
   const handlerSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formUser = event.currentTarget;
+    const formData = event.currentTarget as HTMLFormElement;
+    const inputs = formData.querySelectorAll("input");
 
-    const registerForm: Partial<User> = {
-      email: (formUser.elements[0] as HTMLFormElement).value,
-      passwd: (formUser.elements[1] as HTMLFormElement).value,
+    const newUser: Partial<User> = {
+      email: inputs[0].value,
+      passwd: inputs[1].value,
     };
-    userRegister(registerForm);
+    userRegister(newUser);
+    formData.reset();
   };
-
   return (
-    <form onSubmit={handlerSubmit}>
-      <label>
-        email toys
-        <input type="email" name="email" required />
-      </label>
-      <label>
-        password
-        <input type="password" name="password" role="textbox" required />
-      </label>
+    <div>
+      <form onSubmit={handlerSubmit}>
+        <label>
+          email
+          <input type="email" name="email" required />
+        </label>
+        <label>
+          password
+          <input type="password" name="password" />
+        </label>
 
-      <button type="submit">Register</button>
-    </form>
+        <button type="submit">Register</button>
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+      </form>{" "}
+    </div>
   );
 }
