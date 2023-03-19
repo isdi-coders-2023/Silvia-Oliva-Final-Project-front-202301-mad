@@ -1,22 +1,27 @@
-import { lazy, Suspense } from "react";
-import { Route, Routes } from "react-router-dom";
-import { MenuOption } from "../app/app";
+import { AppRouter } from "../app.router/";
+import { Header } from "../header/header.js";
+import { Menu } from "../menu/menu.js";
+import "./app.css";
 
-const Home = lazy(() => import("../home/home"));
-const Gallery = lazy(() => import("../gallery/gallery"));
-
-type AppRouterProps = {
-  menuOptions: MenuOption[];
+export type MenuOption = {
+  label: string;
+  path: string;
+  image?: string;
 };
+export const menuOptions: MenuOption[] = [
+  { label: "Home", path: "/home" },
+  { label: "Gallery", path: "/gallery" },
+];
 
-export function AppRouter({ menuOptions }: AppRouterProps) {
+export function App() {
   return (
-    <Suspense>
-      <Routes>
-        <Route path={"/"} element={<Home></Home>}></Route>
-        <Route path={menuOptions[0].path} element={<Home></Home>}></Route>
-        <Route path={menuOptions[1].path} element={<Gallery></Gallery>}></Route>
-      </Routes>
-    </Suspense>
+    <>
+      <Header>
+        <Menu options={menuOptions}></Menu>
+      </Header>
+      <AppRouter menuOptions={menuOptions}></AppRouter>
+    </>
   );
 }
+
+export default App;
