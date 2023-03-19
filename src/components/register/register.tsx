@@ -27,12 +27,12 @@ export default function Register() {
     <div>
       <form onSubmit={handlerSubmit}>
         <label>
-          email toys
+          email
           <input type="email" name="email" required />
         </label>
         <label>
           password
-          <input type="password" name="password" role="textbox" required />
+          <input type="password" name="password" />
         </label>
 
         <button type="submit">Register</button>
