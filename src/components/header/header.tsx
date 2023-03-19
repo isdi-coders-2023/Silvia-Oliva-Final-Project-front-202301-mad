@@ -1,3 +1,5 @@
+import "./header.css";
+
 type HeaderProps = { children: JSX.Element };
 
 export function Header({ children }: HeaderProps) {
