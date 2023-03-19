@@ -31,7 +31,7 @@ describe("Given the app router component", () => {
     });
   });
   describe("when the route is Gallery", () => {
-    test("then it should go to /profile and render it", async () => {
+    test("then it should go to /gallery and render it", async () => {
       await waitFor(async () => mockRouterFunctions(1));
       const element = await screen.findByRole("heading");
       expect(element).toBeInTheDocument();
