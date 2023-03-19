@@ -22,20 +22,8 @@ export default function LogIn() {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          placeholder="Password"
-        />
+        <input name="email" id="email" required />
+        <input id="password" required placeholder="Password" />
         <button type="submit">Login</button>
         <div>
           <Link to="/register">Register</Link>
