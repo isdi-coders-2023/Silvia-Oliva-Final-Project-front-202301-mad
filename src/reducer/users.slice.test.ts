@@ -5,7 +5,7 @@ import { userReducer, State } from "./users.slice";
 const mockPasswd = "test";
 
 const mockUser = {
-  id: "3",
+  id: "5",
   email: "revilla@gmail.com",
   passwd: mockPasswd,
 };

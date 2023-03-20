@@ -31,7 +31,7 @@ export class UsersRepo implements Repo<ServerType> {
   }
 
   async update(
-    userInfo: Partial<UserStructure>,
+    registerForm: Partial<UserStructure>,
     urlExtraPath: string,
     token: string
   ): Promise<ServerType> {
@@ -39,7 +39,7 @@ export class UsersRepo implements Repo<ServerType> {
 
     const resp = await fetch(url, {
       method: "PATCH",
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(registerForm),
       headers: {
         Authorization: "Bearer " + token,
       },
