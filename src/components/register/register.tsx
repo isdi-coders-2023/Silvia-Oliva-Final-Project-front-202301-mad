@@ -1,48 +1,65 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
-import { Link } from "react-router-dom";
 import { useUsers } from "../../hooks/use.users";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
-
+import styles from "./register.module.scss";
 export function Register() {
   const repo = useMemo(() => new UsersRepo(), []);
+
   const { userRegister } = useUsers(repo);
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handlerSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = event.currentTarget as HTMLFormElement;
-    const inputs = formData.querySelectorAll("input");
 
-    const newUser: Partial<User> = {
-      email: inputs[0].value,
-      passwd: inputs[1].value,
+    const formUser = event.currentTarget;
+
+    const registerForm: Partial<User> = {
+      username: (formUser.elements[0] as HTMLFormElement).value,
+      email: (formUser.elements[1] as HTMLFormElement).value,
+      password: (formUser.elements[2] as HTMLFormElement).value,
     };
 
-    userRegister(newUser);
-    formData.reset();
+    userRegister(registerForm);
   };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          required
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          placeholder="Password"
-        />
-        <button type="submit">Register</button>
+    <div className={styles.register}>
+      <h2>Register</h2>
+      <form data-testid="form" onSubmit={handlerSubmit}>
         <div>
-          <Link to="/login">Login</Link>
+          <p>name:</p>
+          <input
+            type="text"
+            placeholder="Name"
+            className="register-form__field"
+            name="name"
+          />
         </div>
+
+        <div>
+          <p>Email:</p>
+          <input
+            type="text"
+            placeholder="email"
+            className="register-form__field"
+            name="email"
+          />
+        </div>
+        <div>
+          <p>Password:</p>
+          <input
+            type="text"
+            placeholder="Password"
+            className="register-form__field"
+            name="passwd"
+          />
+        </div>
+
+        <button>Register</button>
       </form>
     </div>
   );
 }
+
+export default Register;

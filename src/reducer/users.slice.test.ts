@@ -1,18 +1,18 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
-import { userReducer, State, loginToken } from "./users.slice";
+import { State, userReducer } from "./users.slice";
 
-const mockPasswd = "test";
+const mockPasswd = "revilla";
 
 const mockUser = {
-  id: "5",
-  email: "revilla@gmail.com",
-  passwd: mockPasswd,
+  id: "3",
+  username: "revilla",
+  email: "revilla",
+  password: mockPasswd,
 };
 const mockInitialState: State = {
   userLogged: {} as UserStructure,
   users: [],
-  token: "string",
 };
 
 describe("Given the userSlice", () => {
@@ -37,16 +37,3 @@ describe("Given the userSlice", () => {
     });
   });
 });
-
-// import { loginToken } from "./loginToken";
-// import { UserStructure } from "./UserStructure";
-
-// describe("loginToken function", () => {
-//   it("should update state with userLogged property", () => {
-//     const state = { userLogged: null };
-//     const user = new UserStructure("John", "Doe");
-//     // const action = { type: "loginToken", payload: user };
-//     const newState = loginToken(state);
-//     expect(newState.userLogged).toEqual(user);
-//   });
-// });

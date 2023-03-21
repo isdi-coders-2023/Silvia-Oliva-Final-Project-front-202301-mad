@@ -1,7 +1,7 @@
 import { MenuOption } from "../app/app";
-import "./menu.css";
+import "./menu.module.scss";
 
-type MenuProps = {
+export type MenuProps = {
   options: MenuOption[];
 };
 
@@ -10,7 +10,7 @@ export function Menu({ options }: MenuProps) {
     <nav>
       <ul>
         {options.map((item) => (
-          <li key={item.label}></li>
+          <li key={item.label}>{item.label}</li>
         ))}
       </ul>
     </nav>

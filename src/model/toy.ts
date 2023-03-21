@@ -1,4 +1,4 @@
-export type ToyStructure = {
+export type ProtoToyStructure = {
   id: string;
   name: string;
   animalModel: string;
@@ -6,17 +6,8 @@ export type ToyStructure = {
   description: string;
   img: string;
 };
-export type ServerTypeToy = {
+export type ToyStructure = { id: string } & ProtoToyStructure;
+
+export type ToyServerResponse = {
   results: ToyStructure[];
 };
-
-export class Toy implements ToyStructure {
-  constructor(
-    public id: string,
-    public name: string,
-    public animalModel: string,
-    public height: number,
-    public description: string,
-    public img: string
-  ) {}
-}

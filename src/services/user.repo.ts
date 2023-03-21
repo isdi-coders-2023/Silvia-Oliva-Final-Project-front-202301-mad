@@ -1,4 +1,4 @@
-import { ServerType, UserStructure, TokenResponse } from "../model/user";
+import { ServerType, UserStructure } from "../model/user";
 import { URL_AMIGURUMIS_USERS } from "../variables";
 import { Repo } from "./user.repo.interface";
 
@@ -9,39 +9,16 @@ export class UsersRepo implements Repo<ServerType> {
   }
 
   async create(
-    registerForm: Partial<UserStructure>,
+    userInfo: Partial<UserStructure>,
     urlExtraPath: string
   ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {
       method: "POST",
-      body: JSON.stringify(registerForm),
+      body: JSON.stringify(userInfo),
       headers: {
         "Content-type": "application/json",
-      },
-    });
-
-    if (!resp.ok)
-      throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
-
-    const serverResponse = await resp.json();
-
-    return serverResponse;
-  }
-
-  async update(
-    registerForm: Partial<UserStructure>,
-    urlExtraPath: string,
-    token: string
-  ): Promise<ServerType> {
-    const url = this.url + "/" + urlExtraPath;
-
-    const resp = await fetch(url, {
-      method: "PATCH",
-      body: JSON.stringify(registerForm),
-      headers: {
-        Authorization: "Bearer " + token,
       },
     });
     if (!resp.ok)
@@ -52,17 +29,18 @@ export class UsersRepo implements Repo<ServerType> {
     return data;
   }
 
-  async login(
-    loginInfo: Partial<UserStructure>,
-    urlExtraPath: string
-  ): Promise<TokenResponse> {
+  async update(
+    userInfo: Partial<UserStructure>,
+    urlExtraPath: string,
+    token: string
+  ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
 
     const resp = await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(loginInfo),
+      method: "PATCH",
+      body: JSON.stringify(userInfo),
       headers: {
-        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
       },
     });
     if (!resp.ok)

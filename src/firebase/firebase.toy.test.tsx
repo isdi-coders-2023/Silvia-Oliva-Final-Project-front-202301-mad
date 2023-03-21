@@ -6,21 +6,28 @@ jest.mock("firebase/storage");
 describe("Given the firebase function", () => {
   describe("when there is NO FILE param", () => {
     test("then, the toy should be the default image", async () => {
-      const mockInfo = { id: "2", toy: "123" };
+      const mockToy = {
+        id: "2",
+        name: "pepe",
+        animalModel: "oso",
+        height: 3,
+        description: "osos amoroso",
+        img: "pepe",
+      };
 
-      await newImage(mockInfo);
-      expect(mockInfo.toy).toBe(
+      const result = await newImage(mockToy);
+      expect(result).toBe(
         "https://console.firebase.google.com/project/amigurumis-95a10/storage/amigurumis-95a10.appspot.com/files?hl=es-419"
       );
     });
   });
   describe("when there is a FILE param", () => {
     test("then, the avatar should be the default image", async () => {
-      const mockInfo = { id: "2", toy: "123" };
+      const mockToy = { id: "2", toy: "123" };
       const mockFile = new File(["toy"], "toy.png", {
         type: "image/png",
       });
-      await newImage(mockInfo, mockFile);
+      await newImage(mockToy, mockFile);
       expect(getDownloadURL).toHaveBeenCalled();
     });
   });

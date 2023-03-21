@@ -5,7 +5,7 @@ import { store } from "../../store/store";
 import { Register } from "../register/register";
 import Home from "./home";
 
-jest.mock("../register");
+jest.mock("../register/register");
 
 beforeEach(() => {
   render(

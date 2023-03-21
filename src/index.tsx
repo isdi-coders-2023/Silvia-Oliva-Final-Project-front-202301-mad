@@ -5,7 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { store } from "./store/store";
 import App from "./components/app/app";
-import { MemoryRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
