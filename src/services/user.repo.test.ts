@@ -32,13 +32,23 @@ describe("Given the users repo", () => {
         ok: true,
         json: jest.fn().mockResolvedValue(mockValue),
       });
-      const result = await repo.update({ id: "2" }, "test", "testtoken");
+      const result = await repo.update({ id: "2" }, "test", "testToken");
       expect(result).toEqual(mockValue);
     });
     test("then if the fetch is NOT OK it throw error", async () => {
       global.fetch = jest.fn().mockResolvedValue("Error test");
-      const result = repo.update({ id: "1" }, "test", "testtoken");
+      const result = repo.update({ id: "1" }, "test", "testToken");
       await expect(result).rejects.toThrow();
     });
   });
+
+  // describe("login", () => {
+  //   it("should return token from API", async () => {
+  //     const loginInfo = { username: "test", password: "testToken" };
+  //     const urlExtraPath = "api/login";
+
+  //     const token = await TokenResponse.login(loginInfo, urlExtraPath);
+  //     expect(token).toEqual({ token: "token" });
+  //   });
+  // });
 });
