@@ -4,7 +4,7 @@ import { useUsers } from "../../hooks/use.users";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
 
-export default function LogIn() {
+export function LogIn() {
   const repo = useMemo(() => new UsersRepo(), []);
 
   const { userLogin } = useUsers(repo);
