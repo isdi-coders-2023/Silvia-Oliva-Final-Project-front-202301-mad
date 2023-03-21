@@ -2,7 +2,7 @@
   "name": "proyecto.final.front",
   "version": "1.0.0",
   "private": true,
-   "dependencies": {
+  "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -60,4 +60,3 @@
     "husky": "^8.0.3"
   }
 }
-
