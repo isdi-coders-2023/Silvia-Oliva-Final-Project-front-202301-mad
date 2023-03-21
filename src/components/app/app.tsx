@@ -7,7 +7,6 @@ import "./app.css";
 export type MenuOption = {
   label: string;
   path: string;
-  image?: string;
 };
 export const menuOptions: MenuOption[] = [
   { label: "Home", path: "/home" },
