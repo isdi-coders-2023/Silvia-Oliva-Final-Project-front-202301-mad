@@ -22,7 +22,6 @@ export function useUsers(repo: UsersRepo) {
     try {
       const data = await repo.create(loginForm, "users/login");
       console.log(data);
-      console.log("hola");
       dispatch(login(data.results[0]));
     } catch (error) {}
   };

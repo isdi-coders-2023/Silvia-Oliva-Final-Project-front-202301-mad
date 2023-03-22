@@ -14,7 +14,6 @@ describe("Given the useUsers hook", () => {
 
   beforeEach(async () => {
     mockPayload = {
-      username: "test",
       email: "test",
     } as unknown as UserStructure;
 

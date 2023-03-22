@@ -47,7 +47,7 @@ describe("Given the Register component", () => {
       await userEvent.click(button);
       expect(useUsers(usersMockRepo).userRegister).toHaveBeenCalledWith({
         email: "test",
-        passwd: "test",
+        passwd: "passwd",
       });
     });
   });

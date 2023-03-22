@@ -13,7 +13,6 @@ export class UsersRepo implements Repo<ServerType> {
     urlExtraPath: string
   ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
-    console.log(url);
     const resp = await fetch(url, {
       method: "POST",
       body: JSON.stringify(registerForm),
@@ -21,7 +20,6 @@ export class UsersRepo implements Repo<ServerType> {
         "Content-type": "application/json",
       },
     });
-    console.log(resp);
     if (!resp.ok)
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
 
