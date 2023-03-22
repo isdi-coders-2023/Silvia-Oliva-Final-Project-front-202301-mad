@@ -4,13 +4,11 @@ import { MemoryRouter as Router } from "react-router-dom";
 import { store } from "../../store/store";
 import { MenuOption } from "../app/app";
 import { AppRouter } from "./app.router";
-
 describe("Given the app router component", () => {
   const mockOptions: MenuOption[] = [
     { label: "Home", path: "/home" },
     { label: "Gallery", path: "/gallery" },
   ];
-
   const mockRouterFunctions = (num: number) => {
     render(
       <Provider store={store}>

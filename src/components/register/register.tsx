@@ -15,9 +15,8 @@ export function Register() {
     const formUser = event.currentTarget;
 
     const registerForm: Partial<User> = {
-      username: (formUser.elements[0] as HTMLFormElement).value,
-      email: (formUser.elements[1] as HTMLFormElement).value,
-      password: (formUser.elements[2] as HTMLFormElement).value,
+      email: (formUser.elements[0] as HTMLFormElement).value,
+      password: (formUser.elements[1] as HTMLFormElement).value,
     };
 
     userRegister(registerForm);
@@ -27,16 +26,6 @@ export function Register() {
     <div className={styles.register}>
       <h2>Register</h2>
       <form data-testid="form" onSubmit={handlerSubmit}>
-        <div>
-          <p>name:</p>
-          <input
-            type="text"
-            placeholder="Name"
-            className="register-form__field"
-            name="name"
-          />
-        </div>
-
         <div>
           <p>Email:</p>
           <input

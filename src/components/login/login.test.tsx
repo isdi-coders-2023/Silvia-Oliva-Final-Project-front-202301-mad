@@ -48,7 +48,7 @@ describe("Given the login function", () => {
       await userEvent.click(fireButton);
       expect(fireButton).toBeInTheDocument();
       expect(useUsers(mockRepo).userLogin).toBeCalledWith({
-        email: "revilla",
+        email: "test",
         password: mockPasswd,
       });
     });

@@ -3,12 +3,13 @@ import { AppRouter } from "../app.router/app.router";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
 import "./app.css";
-
 export type MenuOption = {
   label: string;
   path: string;
 };
 export const menuOptions: MenuOption[] = [
+  { label: "Login", path: "/login" },
+  { label: "Register", path: "/register" },
   { label: "Home", path: "/home" },
   { label: "Gallery", path: "/gallery" },
 ];
@@ -23,5 +24,4 @@ export function App() {
     </>
   );
 }
-
 export default App;

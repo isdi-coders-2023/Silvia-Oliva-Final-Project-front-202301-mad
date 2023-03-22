@@ -28,14 +28,6 @@ describe("Given the Register component", () => {
       const element = screen.getByRole("heading");
       expect(element).toBeInTheDocument();
     });
-    test("Then the name <input> should be in the document", () => {
-      const inputs = screen.getAllByRole("textbox");
-      expect(inputs[0]).toBeInTheDocument();
-    });
-    test("Then the lastName <input> should be in the document", () => {
-      const inputs = screen.getAllByRole("textbox");
-      expect(inputs[1]).toBeInTheDocument();
-    });
 
     test("Then the <button> should be in the document", () => {
       const element = screen.getByRole("button");
