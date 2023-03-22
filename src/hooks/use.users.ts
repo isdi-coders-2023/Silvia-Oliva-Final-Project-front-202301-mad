@@ -8,20 +8,21 @@ export function useUsers(repo: UsersRepo) {
   const users = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch<AppDispatch>();
 
-  const userRegister = async (userInfo: Partial<UserStructure>) => {
+  const userRegister = async (registerForm: Partial<UserStructure>) => {
     try {
-      const infoUser = await repo.create(userInfo, "register");
+      console.log(registerForm);
+      const infoUser = await repo.create(registerForm, "users/register");
       dispatch(register(infoUser.results[0]));
     } catch (error) {
       console.log((error as Error).message);
     }
   };
 
-  const userLogin = async (info: Partial<UserStructure>) => {
+  const userLogin = async (loginForm: Partial<UserStructure>) => {
     try {
-      const data = await repo.create(info, "login");
+      const data = await repo.create(loginForm, "users/login");
       console.log(data);
-
+      console.log("hola");
       dispatch(login(data.results[0]));
     } catch (error) {}
   };

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use.users";
-import { User } from "../../model/user";
+import { UserStructure } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
 import styles from "./register.module.scss";
 export function Register() {
@@ -14,9 +14,9 @@ export function Register() {
 
     const formUser = event.currentTarget;
 
-    const registerForm: Partial<User> = {
+    const registerForm: Partial<UserStructure> = {
       email: (formUser.elements[0] as HTMLFormElement).value,
-      password: (formUser.elements[1] as HTMLFormElement).value,
+      passwd: (formUser.elements[1] as HTMLFormElement).value,
     };
 
     userRegister(registerForm);
@@ -27,7 +27,7 @@ export function Register() {
       <h2>Register</h2>
       <form data-testid="form" onSubmit={handlerSubmit}>
         <div>
-          <p>Email:</p>
+          <p>Email register:</p>
           <input
             type="text"
             placeholder="email"

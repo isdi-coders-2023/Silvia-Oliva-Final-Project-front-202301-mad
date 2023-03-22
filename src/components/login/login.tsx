@@ -15,7 +15,7 @@ export function LogIn() {
 
     const loginForm: Partial<User> = {
       email: (formUSer.elements[0] as HTMLFormElement).value,
-      password: (formUSer.elements[1] as HTMLFormElement).value,
+      passwd: (formUSer.elements[1] as HTMLFormElement).value,
     };
 
     userLogin(loginForm);
@@ -28,13 +28,7 @@ export function LogIn() {
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="email" placeholder="Email" required />
-        <input
-          type="password"
-          name="password"
-          role="textbox"
-          placeholder="Password:"
-          required
-        />
+        <input type="password" placeholder="Password:" required />
         <button type="submit">Login</button>
       </form>
     </div>

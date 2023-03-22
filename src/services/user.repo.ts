@@ -9,18 +9,19 @@ export class UsersRepo implements Repo<ServerType> {
   }
 
   async create(
-    userInfo: Partial<UserStructure>,
+    registerForm: Partial<UserStructure>,
     urlExtraPath: string
   ): Promise<ServerType> {
     const url = this.url + "/" + urlExtraPath;
-
+    console.log(url);
     const resp = await fetch(url, {
       method: "POST",
-      body: JSON.stringify(userInfo),
+      body: JSON.stringify(registerForm),
       headers: {
         "Content-type": "application/json",
       },
     });
+    console.log(resp);
     if (!resp.ok)
       throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
 
