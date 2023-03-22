@@ -2,6 +2,7 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 import { Provider } from "react-redux";
 import { UserStructure } from "../model/user";
 import { UsersRepo } from "../services/user.repo";
