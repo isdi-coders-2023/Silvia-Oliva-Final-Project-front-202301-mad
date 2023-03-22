@@ -41,7 +41,7 @@ describe("Given the Register component", () => {
       } as unknown as UsersRepo;
       const inputs = screen.getAllByRole("textbox");
       await userEvent.type(inputs[0], "test");
-      await userEvent.type(inputs[1], "test");
+      await userEvent.type(inputs[1], "passwd");
 
       const button = screen.getByRole("button");
       await userEvent.click(button);
