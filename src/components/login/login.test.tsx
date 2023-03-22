@@ -2,7 +2,7 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 import userEvent from "@testing-library/user-event/";
 import { Provider } from "react-redux";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { useUsers } from "../../hooks/use.users";
 import { UsersRepo } from "../../services/user.repo";
 import { store } from "../../store/store";
