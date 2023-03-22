@@ -41,13 +41,13 @@ describe("Given the Register component", () => {
       } as unknown as UsersRepo;
       const inputs = screen.getAllByRole("textbox");
       await userEvent.type(inputs[0], "test");
-      await userEvent.type(inputs[1], "passwd");
+      await userEvent.type(inputs[1], "test");
 
       const button = screen.getByRole("button");
       await userEvent.click(button);
       expect(useUsers(usersMockRepo).userRegister).toHaveBeenCalledWith({
         email: "test",
-        passwd: "passwd",
+        passwd: "test",
       });
     });
   });
