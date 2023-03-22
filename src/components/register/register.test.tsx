@@ -14,7 +14,7 @@ describe("Given the Register component", () => {
   beforeEach(async () => {
     await act(async () => {
       (useUsers as jest.Mock).mockReturnValue({
-        registerUser: jest.fn(),
+        userRegister: jest.fn(),
       });
       render(
         <Provider store={store}>

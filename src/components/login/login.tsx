@@ -28,7 +28,12 @@ export function LogIn() {
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="email" placeholder="Email" required />
-        <input type="password" placeholder="Password:" required />
+        <input
+          type="password"
+          data-testid="password"
+          placeholder="Password:"
+          required
+        />
         <button type="submit">Login</button>
       </form>
     </div>

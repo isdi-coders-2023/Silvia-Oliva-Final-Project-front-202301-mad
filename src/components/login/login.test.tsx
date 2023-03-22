@@ -14,42 +14,40 @@ const mockPasswd = "pass test";
 jest.mock("../../hooks/use.users");
 
 beforeEach(() => {
-  act(() => {
-    (useUsers as jest.Mock).mockReturnValue({ userLogin: jest.fn() });
-  });
+  (useUsers as jest.Mock).mockReturnValue({ userLogin: jest.fn() });
+
+  render(
+    <Provider store={store}>
+      <LogIn></LogIn>
+    </Provider>
+  );
 });
 
 describe("Given the login function", () => {
   describe("when you render the component login", () => {
     test("then the email and passwd should be in the document", async () => {
-      render(
-        <Provider store={store}>
-          <LogIn></LogIn>
-        </Provider>
-      );
-      const elements = screen.getAllByRole("textbox");
-      expect(elements[0]).toBeInTheDocument();
-      expect(elements[1]).toBeInTheDocument();
+      const input = screen.getByRole("textbox");
+      const pass = screen.getByTestId("password");
+
+      expect(input).toBeInTheDocument();
+      expect(pass).toBeInTheDocument();
     });
   });
   describe("when you you press the submit button", () => {
     test("then the email and passwd should be send", async () => {
       const mockRepo = {} as UsersRepo;
-      render(
-        <Provider store={store}>
-          <LogIn></LogIn>
-        </Provider>
-      );
-      const inputs = screen.getAllByRole("textbox");
+
+      const inputs = screen.getByRole("textbox");
+      const pass = screen.getByTestId("password");
       const fireButton = screen.getByRole("button");
 
-      await userEvent.type(inputs[0], "test");
-      await userEvent.type(inputs[1], "pass test");
+      await userEvent.type(inputs, "test");
+      await userEvent.type(pass, "pass test");
       await userEvent.click(fireButton);
       expect(fireButton).toBeInTheDocument();
       expect(useUsers(mockRepo).userLogin).toBeCalledWith({
         email: "test",
-        password: mockPasswd,
+        passwd: mockPasswd,
       });
     });
   });
