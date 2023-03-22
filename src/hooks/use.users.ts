@@ -10,20 +10,20 @@ export function useUsers(repo: UsersRepo) {
 
   const userRegister = async (registerForm: Partial<UserStructure>) => {
     try {
-      const data = await repo.create(registerForm, "users/register");
-      dispatch(register(data.results[0]));
+      console.log(registerForm);
+      const infoUser = await repo.create(registerForm, "users/register");
+      dispatch(register(infoUser.results[0]));
     } catch (error) {
-      console.error((error as Error).message);
+      console.log((error as Error).message);
     }
   };
 
   const userLogin = async (loginForm: Partial<UserStructure>) => {
     try {
       const data = await repo.create(loginForm, "users/login");
+      console.log(data);
       dispatch(login(data.results[0]));
-    } catch (error) {
-      console.error((error as Error).message);
-    }
+    } catch (error) {}
   };
 
   return {

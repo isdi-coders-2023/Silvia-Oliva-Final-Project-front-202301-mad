@@ -1,12 +1,12 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { UserStructure } from "../model/user";
-import { userReducer, State } from "./users.slice";
+import { State, userReducer } from "./users.slice";
 
 const mockPasswd = "test";
 
 const mockUser = {
   id: "3",
-  email: "revilla@gmail.com",
+  email: "test",
   passwd: mockPasswd,
 };
 const mockInitialState: State = {

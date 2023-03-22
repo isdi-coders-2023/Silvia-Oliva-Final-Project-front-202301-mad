@@ -4,13 +4,11 @@ import { MemoryRouter as Router } from "react-router-dom";
 import { store } from "../../store/store";
 import { MenuOption } from "../app/app";
 import { AppRouter } from "./app.router";
-
 describe("Given the app router component", () => {
   const mockOptions: MenuOption[] = [
     { label: "Home", path: "/home" },
     { label: "Gallery", path: "/gallery" },
   ];
-
   const mockRouterFunctions = (num: number) => {
     render(
       <Provider store={store}>
@@ -21,7 +19,7 @@ describe("Given the app router component", () => {
     );
   };
 
-  describe("when the route is Home", () => {
+  describe("when the route is HOME", () => {
     test("then it should go to /home and render it", async () => {
       await waitFor(async () => mockRouterFunctions(0));
       const element = await screen.findByRole("heading", {

@@ -3,32 +3,41 @@ import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use.users";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
-import { Link } from "react-router-dom";
-export default function LogIn() {
+import styles from "./login.module.scss";
+export function LogIn() {
   const repo = useMemo(() => new UsersRepo(), []);
+
   const { userLogin } = useUsers(repo);
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = event.currentTarget as HTMLFormElement;
-    const inputs = formData.querySelectorAll("input");
-    const newUser: Partial<User> = {
-      email: inputs[0].value,
-      passwd: inputs[1].value,
+    const formUSer = event.currentTarget;
+
+    const loginForm: Partial<User> = {
+      email: (formUSer.elements[0] as HTMLFormElement).value,
+      passwd: (formUSer.elements[1] as HTMLFormElement).value,
     };
-    userLogin(newUser);
-    formData.reset();
+
+    userLogin(loginForm);
   };
+
   return (
-    <div>
+    <div className={styles.login}>
+      <h2>Login</h2>
+      <p className="type-in">Type in your registered credentials.</p>
+
       <form onSubmit={handleSubmit}>
-        <input name="email" id="email" required />
-        <input id="password" required placeholder="Password" />
+        <input type="text" name="email" placeholder="Email" required />
+        <input
+          type="password"
+          data-testid="password"
+          placeholder="Password:"
+          required
+        />
         <button type="submit">Login</button>
-        <div>
-          <Link to="/register">Register</Link>
-        </div>
       </form>
     </div>
   );
 }
+
+export default LogIn;

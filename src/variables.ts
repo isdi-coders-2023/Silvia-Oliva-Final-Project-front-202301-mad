@@ -1,1 +1,1 @@
-export const URL_AMIGURUMIS_USERS = "http://localhost:4500/users";
+export const URL_AMIGURUMIS_USERS = "http://localhost:4500";

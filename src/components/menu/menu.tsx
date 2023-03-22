@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { MenuOption } from "../app/app";
+import "./menu.module.scss";
 
-type MenuProps = {
+export type MenuProps = {
   options: MenuOption[];
 };
 
@@ -12,7 +13,7 @@ export function Menu({ options }: MenuProps) {
         {options.map((item) => (
           <li key={item.label}>
             <Link to={item.path}>
-              <img className="home__image" src={item.image} alt={item.label} />
+              <p>{item.label}</p>
             </Link>
           </li>
         ))}

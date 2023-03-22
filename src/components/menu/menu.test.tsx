@@ -1,24 +1,26 @@
+/* eslint-disable testing-library/no-render-in-setup */
 import { render, screen } from "@testing-library/react";
-import { MenuOption } from "../app/app";
 import { MemoryRouter as Router } from "react-router-dom";
-import { Menu } from "./menu";
+import { Menu, MenuProps } from "../menu/menu";
 
 describe("Given the menu component", () => {
   describe("when we render the component", () => {
     test("then it should render the menu component in the header component", () => {
-      const mockOptions: MenuOption[] = [
-        {
-          label: "test",
-          path: "/test",
-        },
-      ];
+      const mockOptions: MenuProps = {
+        options: [
+          {
+            label: "test",
+            path: "/test",
+          },
+        ],
+      };
       render(
         <Router>
-          <Menu options={mockOptions}></Menu>
+          <Menu options={mockOptions.options}></Menu>
         </Router>
       );
 
-      const element = screen.getByAltText(mockOptions[0].label);
+      const element = screen.getByText(mockOptions.options[0].label);
       expect(element).toBeInTheDocument();
     });
   });
