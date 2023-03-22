@@ -1,9 +1,8 @@
 export type UserStructure = {
   id: string;
-
   email: string;
   passwd: string;
-  token?: string;
+  // token?: string;
 };
 
 export type ServerType = {
@@ -11,10 +10,9 @@ export type ServerType = {
 };
 
 export class User implements UserStructure {
-  constructor(
-    public id: string,
-
-    public email: string,
-    public passwd: string
-  ) {}
+  constructor(public id: string, public email: string, public passwd: string) {}
 }
+
+export type TokenResponse = {
+  results: [];
+};
