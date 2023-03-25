@@ -6,7 +6,9 @@ describe("Given the Header component", () => {
     test("then it should render it", () => {
       render(
         <Header>
-          <></>
+          <>
+            <menu></menu>
+          </>
         </Header>
       );
       const element = screen.getByRole("heading");

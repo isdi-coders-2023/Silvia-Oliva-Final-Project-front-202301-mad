@@ -9,7 +9,7 @@ export type State = {
 const initialState: State = {
   userLogged: {
     id: "",
-    email: "revilla",
+    email: "",
     passwd: "",
   } as UserStructure,
   token: "No token",

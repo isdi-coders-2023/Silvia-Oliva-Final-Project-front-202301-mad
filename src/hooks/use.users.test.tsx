@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
-import { act, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
@@ -20,6 +20,10 @@ describe("Given the useUsers hook", () => {
 
     mockRepo = {
       create: jest.fn(),
+    } as unknown as UsersRepo;
+
+    mockRepo = {
+      login: jest.fn(),
     } as unknown as UsersRepo;
 
     const TestComponent = function () {
@@ -50,17 +54,18 @@ describe("Given the useUsers hook", () => {
     });
   });
   describe("when the REGISTER button of TestComponent is called", () => {
-    test("then the userRegister should be called", async () => {
-      const elements = await screen.findAllByRole("button");
-      await act(async () => userEvent.click(elements[0]));
-      expect(mockRepo.create).toHaveBeenCalled();
+    test("should call userRegister when the REGISTER button is clicked", () => {
+      const mockUserRegister = jest.fn();
+      render((userRegister = { mockUserRegister }));
+      fireEvent.click(screen.getByRole("button", { name: "REGISTER" }));
+      expect(mockUserRegister).toHaveBeenCalled();
     });
   });
   describe("when the LOGIN button of TestComponent is called", () => {
     test("then the userLogin should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
-      expect(mockRepo.create).toHaveBeenCalled();
+      expect(mockRepo.login).toHaveBeenCalled();
     });
   });
 });

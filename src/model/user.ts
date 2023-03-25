@@ -2,7 +2,7 @@ export type UserStructure = {
   id: string;
   email: string;
   passwd: string;
-  // token?: string;
+  token?: string;
 };
 
 export type ServerType = {

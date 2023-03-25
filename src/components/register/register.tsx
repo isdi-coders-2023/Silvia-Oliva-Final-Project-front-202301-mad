@@ -3,7 +3,7 @@ import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use.users";
 import { UserStructure } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
-import styles from "./register.module.scss";
+import styles from "../register/register.module.scss";
 export function Register() {
   const repo = useMemo(() => new UsersRepo(), []);
 

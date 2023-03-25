@@ -2,7 +2,7 @@ import React from "react";
 import { AppRouter } from "../app.router/app.router";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
-import "./app.css";
+import styles from "./app.module.scss";
 export type MenuOption = {
   label: string;
   path: string;
@@ -17,10 +17,12 @@ export const menuOptions: MenuOption[] = [
 export function App() {
   return (
     <>
-      <Header>
-        <Menu options={menuOptions}></Menu>
-      </Header>
-      <AppRouter menuOptions={menuOptions}></AppRouter>
+      <div className={styles.app}>
+        <Header>
+          <Menu options={menuOptions}></Menu>
+        </Header>
+        <AppRouter menuOptions={menuOptions}></AppRouter>
+      </div>
     </>
   );
 }

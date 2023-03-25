@@ -24,6 +24,8 @@ export function useUsers(repo: UsersRepo) {
       const tokensResponse: any = await repo.login(loginForm, "users/login");
       console.log(tokensResponse);
       dispatch(loginToken(tokensResponse.results[0]));
+      localStorage.setItem("token", tokensResponse.results[0]);
+
       dispatch(loginUser(tokensResponse.results[1]));
     } catch (error) {}
   };
