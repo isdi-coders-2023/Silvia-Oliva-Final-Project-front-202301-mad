@@ -1,13 +1,19 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use.users";
+import { useNavigate } from "react-router-dom";
 import { User } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
 import styles from "./login.module.scss";
+import { useToys } from "../../hooks/use.toys";
+import { ToysApiRepo } from "../../services/toys.api.repo";
 export function LogIn() {
-  const repo = useMemo(() => new UsersRepo(), []);
+  const repoUsers = useMemo(() => new UsersRepo(), []);
+  const repoToys = useMemo(() => new ToysApiRepo(), []);
+  const { userLogin } = useUsers(repoUsers);
+  const { gallery } = useToys(repoToys);
 
-  const { userLogin } = useUsers(repo);
+  const navigate = useNavigate();
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,8 +25,10 @@ export function LogIn() {
     };
 
     userLogin(loginForm);
+    gallery();
   };
 
+  navigate("/gallery");
   return (
     <div className={styles.login}>
       <h2>Login</h2>

@@ -1,4 +1,4 @@
-import { ServerType, UserStructure } from "../model/user";
+import { ServerType, TokenResponse, UserStructure } from "../model/user";
 import { URL_AMIGURUMIS_USERS } from "../variables";
 import { Repo } from "./user.repo.interface";
 
@@ -7,7 +7,30 @@ export class UsersRepo implements Repo<ServerType> {
   constructor() {
     this.url = URL_AMIGURUMIS_USERS;
   }
+  async login(
+    loginInfo: Partial<UserStructure>,
+    urlExtraPath: string
+  ): Promise<TokenResponse> {
+    const url = this.url + "/" + urlExtraPath;
+    console.log(url);
+    console.log(loginInfo);
 
+    const resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(loginInfo),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!resp.ok)
+      throw new Error(`Error http: ${resp.status} ${resp.statusText}`);
+
+    const data = await resp.json();
+    console.log("token devuelto por el repo");
+    console.log(data);
+
+    return data;
+  }
   async create(
     registerForm: Partial<UserStructure>,
     urlExtraPath: string

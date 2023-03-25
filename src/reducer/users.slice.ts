@@ -3,27 +3,31 @@ import { UserStructure } from "../model/user";
 
 export type State = {
   userLogged: UserStructure;
-  users: UserStructure[];
+  token: string;
 };
 
 const initialState: State = {
-  userLogged: {} as UserStructure,
-  users: [],
+  userLogged: {
+    id: "",
+    email: "",
+    passwd: "",
+  } as UserStructure,
+  token: "No token",
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    register(state, action: PayloadAction<UserStructure>) {
-      state.users = [...state.users, action.payload];
+    loginToken(state: State, action: PayloadAction<string>) {
+      state.token = action.payload;
     },
-    login(state, action: PayloadAction<UserStructure>) {
+    loginUser(state: State, action: PayloadAction<UserStructure>) {
       state.userLogged = action.payload;
     },
   },
 });
 
-export const { register, login } = userSlice.actions;
+export const { loginToken, loginUser } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
