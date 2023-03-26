@@ -1,9 +1,9 @@
 .login {
   padding: 1rem 2rem;
-  background-color: #c0097a;
+  background-color: #6d6875;
   h2 {
     margin-bottom: 2rem;
-    color: #414a2b;
+    color: #ffcdb2;
   }
   p {
     padding-bottom: 3rem;
@@ -12,18 +12,19 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-
     input {
       width: 15rem;
       border-style: none;
       border-bottom: solid;
-      border-color: #617143;
+
       background-color: #ede9d5;
     }
     button {
+      width: 12rem;
       align-content: center;
-      width: fit-content;
+      height: fit-content;
       align-self: center;
+      background-color: #ffcdb2;
     }
     p {
       color: #7d3017;

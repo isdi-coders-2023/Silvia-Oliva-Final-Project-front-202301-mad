@@ -6,6 +6,7 @@ const Home = lazy(() => import("../home/home"));
 const Register = lazy(() => import("../register/register"));
 const Login = lazy(() => import("../login/login"));
 const Gallery = lazy(() => import("../gallery/gallery"));
+const Details = lazy(() => import("../details/toy.details"));
 type AppRouterProps = {
   menuOptions: MenuOption[];
 };
@@ -18,6 +19,7 @@ export function AppRouter({ menuOptions }: AppRouterProps) {
         <Route path={"/login"} element={<Login></Login>}></Route>
         <Route path={"/home"} element={<Home></Home>}></Route>
         <Route path={"/gallery"} element={<Gallery></Gallery>}></Route>
+        <Route path={"/details"} element={<Details></Details>}></Route>
       </Routes>
     </Suspense>
   );
