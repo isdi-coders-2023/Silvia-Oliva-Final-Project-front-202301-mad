@@ -1,7 +1,5 @@
 import { AppDispatch, RootState } from "../store/store";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { ToysApiRepo } from "../services/toys.api.repo";
 import {
   loadGallery,

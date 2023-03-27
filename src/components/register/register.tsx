@@ -3,7 +3,7 @@ import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hooks/use.users";
 import { UserStructure } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
-import styles from "../register/register.module.scss";
+import styles from "./register.module.scss";
 export function Register() {
   const repo = useMemo(() => new UsersRepo(), []);
 
@@ -27,7 +27,6 @@ export function Register() {
       <h2>Register</h2>
       <form data-testid="form" onSubmit={handlerSubmit}>
         <div>
-          <p>Email register:</p>
           <input
             type="text"
             placeholder="email"
@@ -44,8 +43,7 @@ export function Register() {
             name="passwd"
           />
         </div>
-
-        <button>Register</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

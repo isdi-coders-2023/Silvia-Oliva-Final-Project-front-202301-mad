@@ -1,29 +1,33 @@
 .register {
   padding: 1rem 2rem;
-  background-color:darkgreen h2 {
+  background-color: #6d6875;
+  h2 {
     margin-bottom: 2rem;
-    color: brown;
+    color: #ffcdb2;
+  }
+  p {
+    padding-bottom: 3rem;
   }
   form {
     display: flex;
     flex-direction: column;
     gap: 3rem;
-
     input {
       width: 15rem;
       border-style: none;
       border-bottom: solid;
-      border-color: #ede9d5;
-      background-color: #ecd459;
+
+      background-color: #ede9d5;
     }
     button {
       width: 12rem;
       align-content: center;
       height: fit-content;
       align-self: center;
+      background-color: #ffcdb2;
     }
     p {
-      color: #6b6b6b;
+      color: #292727;
     }
   }
 }

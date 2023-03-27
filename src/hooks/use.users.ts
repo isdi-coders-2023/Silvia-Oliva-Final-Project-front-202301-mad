@@ -29,7 +29,6 @@ export function useUsers(repo: UsersRepo) {
       dispatch(loginUser(tokensResponse.results[1]));
     } catch (error) {}
   };
-
   return {
     userLogged,
     token,

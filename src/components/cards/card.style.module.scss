@@ -28,14 +28,14 @@
       height: 300px;
     }
 
-    .toyCardInfoStyle {
+    .toyCardInfoHeight {
       font-size: 1rem;
     }
 
-    .toyCardInfoPrice {
+    .toyCardInfoDescription {
       font-size: 1.3rem;
-      font-family: "Lato", sans-serif;
-      color: rgb(200, 0, 0);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: rgb(241, 136, 136);
     }
   }
 
@@ -46,20 +46,6 @@
     cursor: pointer;
     border-radius: 0.5rem;
     padding: 0.2rem 0.6rem;
-  }
-
-  .toyCardButtonsAdd {
-    img {
-      width: 40px;
-      cursor: pointer;
-    }
-  }
-
-  .toyCardButtonsRemove {
-    img {
-      width: 30px;
-      cursor: pointer;
-    }
   }
 }
 

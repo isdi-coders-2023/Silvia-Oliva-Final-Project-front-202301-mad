@@ -11,3 +11,4 @@ describe("Given GalleryPage component", () => {
     });
   });
 });
+export default Gallery;

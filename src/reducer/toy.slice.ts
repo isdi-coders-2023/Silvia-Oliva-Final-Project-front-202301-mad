@@ -24,11 +24,11 @@ const toySlice = createSlice({
       state.toy = action.payload;
     },
 
-    create(state, action: PayloadAction<ToyStructure>) {
+    createToy(state, action: PayloadAction<ToyStructure>) {
       state.allToys = [...state.allToys, action.payload];
     },
 
-    update(state, action: PayloadAction<ToyStructure>) {
+    updateToy(state, action: PayloadAction<ToyStructure>) {
       const actualInfo = [...state.allToys];
 
       state.allToys = actualInfo.map((item) =>
@@ -44,6 +44,6 @@ const toySlice = createSlice({
   },
 });
 
-export const { loadGallery, loadDetails, create, update, deleteToy } =
+export const { loadGallery, loadDetails, createToy, updateToy, deleteToy } =
   toySlice.actions;
 export const toyReducer = toySlice.reducer;
