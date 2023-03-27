@@ -18,11 +18,13 @@ export const menuOptions: MenuOption[] = [
 export function App() {
   return (
     <>
-      <div>
+      <div className="App">
         <Header>
           <Menu options={menuOptions}></Menu>
         </Header>
+
         <AppRouter menuOptions={menuOptions}></AppRouter>
+        <footer></footer>
       </div>
     </>
   );

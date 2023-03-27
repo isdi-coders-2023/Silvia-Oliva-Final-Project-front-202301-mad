@@ -4,11 +4,11 @@ import styles from "./header.module.scss";
 type HeaderProps = { children: JSX.Element };
 
 export function Header({ children }: HeaderProps) {
-  const firstName = useSelector(
-    (state: RootState) => state.users.userLogged.email
-  );
+  const email = useSelector((state: RootState) => state.users.userLogged.email);
+
   return (
     <header className={styles.header}>
+      <div className="header__userLoggedInitial">{email}</div>
       <div>
         <h1 className={styles.tittle}>Amigurumis</h1>
         {children}

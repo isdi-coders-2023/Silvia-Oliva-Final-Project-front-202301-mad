@@ -1,13 +1,16 @@
-// .footer {
-//   height: 2.5vh;
-//   background-color: rgba(20, 88, 97, 1);
-//   color: rgb(255, 255, 255);
-//   font-weight: bold;
-//   font-size: 0.3rem;
-//   display: flex;
-//   padding-left: 2rem;
-//   padding-right: 2rem;
-//   padding-top: 0.2rem;
-//   padding-bottom: 0.2rem;
-//   flex-direction: row-reverse;
-// }
+footer {
+  height: 5vh;
+  background-color: rgb(66, 64, 64);
+  background-color: aquamarine;
+  font-weight: bold;
+  margin-top: 29rem;
+  border-top: 1.4px solid #4c738b;
+
+  h1 {
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+    font-size: 0.8rem;
+    margin-top: 0.7rem;
+  }
+}

@@ -1,0 +1,19 @@
+.gallery {
+  background-color: rgb(53, 52, 52);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  h1 {
+    display: flex;
+  }
+  ul {
+    li {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+  }
+  p {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  img {
+    height: 15rem;
+    width: 15rem;
+  }
+}
