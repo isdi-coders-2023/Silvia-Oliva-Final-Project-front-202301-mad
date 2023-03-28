@@ -9,7 +9,7 @@
     padding-bottom: 3rem;
   }
   form {
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: 3rem;
     input {
@@ -23,7 +23,7 @@
       width: 12rem;
       align-content: center;
       height: fit-content;
-      align-self: center;
+      align-self: flex-end;
       background-color: #ffcdb2;
     }
     p {

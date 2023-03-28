@@ -10,7 +10,6 @@
   gap: 3rem;
 
   ul {
-    width: 36px;
     height: 36px;
     display: flex;
     flex-wrap: wrap;
@@ -18,14 +17,25 @@
     list-style-type: none;
     padding: 0px;
     position: relative;
+    align-items: center;
     top: 20px;
-    left: 20px;
+    left: 10px;
   }
   li {
     background-color: #9e9f9a;
+
+    font-size: 16px;
+    text-align: end;
+    display: flex;
+    gap: 4rem;
+    justify-content: space-evenly;
+    list-style: none;
+    flex-wrap: wrap;
   }
 
   p {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    color: inherit;
   }
 }

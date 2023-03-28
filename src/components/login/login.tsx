@@ -7,12 +7,11 @@ import { UsersRepo } from "../../services/user.repo";
 import styles from "./login.module.scss";
 import { useToys } from "../../hooks/use.toys";
 import { ToysApiRepo } from "../../services/toys.api.repo";
-export function LogIn() {
+export function Login() {
   const repoUsers = useMemo(() => new UsersRepo(), []);
   const repoToys = useMemo(() => new ToysApiRepo(), []);
   const { userLogin } = useUsers(repoUsers);
   const { gallery } = useToys(repoToys);
-
   const navigate = useNavigate();
 
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
@@ -35,11 +34,17 @@ export function LogIn() {
       <p className="type-in">Type in your registered credentials.</p>
 
       <form onSubmit={handleSubmit}>
-        <input type="text" name="email" placeholder="Email" required />
+        <input
+          type="text"
+          name="email"
+          data-testid="email"
+          placeholder="Email"
+          required
+        />
         <input
           type="password"
-          data-testid="password"
-          placeholder="Password:"
+          data-testid="passwd"
+          placeholder="Passwd:"
           required
         />
         <button type="submit">Login</button>
@@ -48,4 +53,4 @@ export function LogIn() {
   );
 }
 
-export default LogIn;
+export default Login;

@@ -39,6 +39,61 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 
     return toyData;
   }
+  async create(
+    token: string,
+    infoToy: Partial<ToyStructure>
+  ): Promise<ToyServerResponse> {
+    const url = this.url + "/create";
+
+    const resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(infoToy),
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+
+    const toyData = (await resp.json()) as ToyServerResponse;
+
+    return toyData;
+  }
+  async delete(token: string, idToy: ToyStructure["id"]): Promise<void> {
+    const url = this.url + "/delete/" + idToy;
+
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+  }
+  async queryId(
+    token: string,
+    idToy: ToyStructure["id"]
+  ): Promise<ToyServerResponse> {
+    const url = this.url + "/details/" + idToy;
+
+    const resp = await fetch(url, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+
+    const toyData = (await resp.json()) as ToyServerResponse;
+
+    return toyData;
+  }
 }
 
 //   async query(
@@ -69,50 +124,6 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 //     return toysData;
 //   }
 
-//   async queryId(
-//     token: string,
-//     idToy: ToyStructure["id"]
-//   ): Promise<ToyServerResponse> {
-//     const url = this.url + "/details/" + idToy;
-
-//     const resp = await fetch(url, {
-//       method: "GET",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-
-//     const toyData = (await resp.json()) as ToyServerResponse;
-
-//     return toyData;
-//   }
-
-//   async create(
-//     token: string,
-//     infoToy: Partial<ToyStructure>
-//   ): Promise<ToyServerResponse> {
-//     const url = this.url + "/create";
-
-//     const resp = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify(infoToy),
-//       headers: {
-//         Authorization: "Bearer " + token,
-//         "Content-type": "application/json",
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-
-//     const toyData = (await resp.json()) as ToyServerResponse;
-
-//     return toyData;
-//   }
-
 //   async update(
 //     token: string,
 //     idToy: ToyStructure["id"],
@@ -136,18 +147,3 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 
 //     return toyData;
 //   }
-
-//   async delete(token: string, idToy: ToyStructure["id"]): Promise<void> {
-//     const url = this.url + "/delete/" + idToy;
-
-//     const resp = await fetch(url, {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-//   }
-// }

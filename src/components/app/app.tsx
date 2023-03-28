@@ -1,5 +1,6 @@
 import React from "react";
 import { AppRouter } from "../app.router/app.router";
+import Footer from "../footer/footer";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
 
@@ -24,7 +25,7 @@ export function App() {
         </Header>
 
         <AppRouter menuOptions={menuOptions}></AppRouter>
-        <footer></footer>
+        <Footer></Footer>
       </div>
     </>
   );

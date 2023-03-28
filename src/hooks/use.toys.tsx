@@ -4,14 +4,15 @@ import { ToysApiRepo } from "../services/toys.api.repo";
 import {
   loadGallery,
   loadDetails,
-  // create,
+  create,
   // update,
-  // deleteToy,
+  deleteToy,
 } from "../reducer/toy.slice";
+import { ToyStructure } from "../model/toy";
 
 export function useToys(repo: ToysApiRepo) {
   const users = useSelector((state: RootState) => state.users);
-  // const toys = useSelector((state: RootState) => state.toys);
+  const toyState = useSelector((state: RootState) => state.toys);
 
   const dispatch = useDispatch<AppDispatch>();
   const tokenAtState = users.token;
@@ -29,10 +30,53 @@ export function useToys(repo: ToysApiRepo) {
     }
   };
 
+  const createToy = async (infoToy: Partial<ToyStructure>) => {
+    try {
+      const userToken = users.userLogged.token;
+      if (!userToken) throw new Error("Not authorized");
+
+      const toyInfo = await repo.create(userToken, infoToy);
+
+      dispatch(create(toyInfo.results[0]));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
+  const deleteOneToy = async (idToy: ToyStructure["id"]) => {
+    try {
+      const userToken = users.userLogged.token;
+      if (!userToken) throw new Error("Not authorized");
+
+      const toyId: string = idToy;
+
+      await repo.delete(userToken, toyId);
+
+      dispatch(deleteToy(toyId));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+  const loadOneToy = async (idToy: ToyStructure["id"]) => {
+    try {
+      const userToken = users.userLogged.token;
+      if (!userToken) throw new Error("Not authorized");
+
+      const toyInfo = await repo.queryId(userToken, idToy);
+
+      dispatch(loadDetails(toyInfo.results[0]));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
   return {
+    toyState,
     gallery,
     loadGallery,
     loadDetails,
+    createToy,
+    deleteOneToy,
+    loadOneToy,
   };
 }
 
@@ -52,32 +96,6 @@ export function useToys(repo: ToysApiRepo) {
 //   [dispatch, repo, usersState.userLogged.token]
 // );
 
-// const loadOneToy = async (idToy: ToyStructure["id"]) => {
-//   try {
-//     const userToken = usersState.userLogged.token;
-//     if (!userToken) throw new Error("Not authorized");
-
-//     const toyInfo = await repo.queryId(userToken, idToy);
-
-//     dispatch(loadDetails(toyInfo.results[0]));
-//   } catch (error) {
-//     console.log((error as Error).message);
-//   }
-// };
-
-// const createToy = async (infoToy: Partial<ToyStructure>) => {
-//   try {
-//     const userToken = usersState.userLogged.token;
-//     if (!userToken) throw new Error("Not authorized");
-
-//     const toyInfo = await repo.create(userToken, infoToy);
-
-//     dispatch(create(toyInfo.results[0]));
-//   } catch (error) {
-//     console.log((error as Error).message);
-//   }
-// };
-
 // const updateToy = async (
 //   idToy: ToyStructure["id"],
 //   infoToy: Partial<ToyStructure>
@@ -89,21 +107,6 @@ export function useToys(repo: ToysApiRepo) {
 //     const toyInfo = await repo.update(userToken, idToy, infoToy);
 
 //     dispatch(update(toyInfo.results[0]));
-//   } catch (error) {
-//     console.log((error as Error).message);
-//   }
-// };
-
-// const deleteOneToy = async (idToy: ToyStructure["id"]) => {
-//   try {
-//     const userToken = usersState.userLogged.token;
-//     if (!userToken) throw new Error("Not authorized");
-
-//     const toyId: string = idToy;
-
-//     await repo.delete(userToken, toyId);
-
-//     dispatch(deleteToy(toyId));
 //   } catch (error) {
 //     console.log((error as Error).message);
 //   }

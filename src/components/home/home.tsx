@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LogIn } from "../login/login";
+import { Login } from "../login/login";
 import { Register } from "../register/register";
 import styles from "./home.module.scss";
 
@@ -25,9 +25,7 @@ export function Home() {
           Register
         </button>
         <button onClick={() => handlerChange(true)}>Login</button>
-        <LogIn></LogIn> <Register></Register>
-        <button>previus</button>
-        <button>next</button>
+        <Login></Login> <Register></Register>
       </div>
     </>
   );
