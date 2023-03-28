@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { Gallery } from "./gallery";
+import Gallery from "./gallery";
 
 jest.mock("./gallery");
 
@@ -11,4 +11,3 @@ describe("Given GalleryPage component", () => {
     });
   });
 });
-export default Gallery;

@@ -5,7 +5,7 @@ import { RootState } from "../../store/store";
 
 import styles from "./toy.details.module.scss";
 
-export function ToyDetails() {
+export default function ToyDetails() {
   const toyDetail = useSelector((state: RootState) => state.toys.toy);
   // const location = useLocation();
   // const { toyProps } = location.state;
@@ -78,4 +78,3 @@ export function ToyDetails() {
     </section>
   );
 }
-export default ToyDetails;

@@ -7,7 +7,7 @@ import { ToysApiRepo } from "../../services/toys.api.repo";
 import { RootState } from "../../store/store";
 import styles from "./gallery.module.scss";
 
-export function Gallery() {
+export default function Gallery() {
   const galleryArray = useSelector((state: RootState) => state.toys.allToys);
   const navigate = useNavigate();
   const repoToys = useMemo(() => new ToysApiRepo(), []);
@@ -44,4 +44,3 @@ export function Gallery() {
     </>
   );
 }
-export default Gallery;

@@ -15,9 +15,9 @@ export function AppRouter({ menuOptions }: AppRouterProps) {
     <Suspense>
       <Routes>
         <Route path={"/"} element={<Home></Home>}></Route>
+        <Route path={"/home"} element={<Home></Home>}></Route>
         <Route path={"/register"} element={<Register></Register>}></Route>
         <Route path={"/login"} element={<Login></Login>}></Route>
-        <Route path={"/home"} element={<Home></Home>}></Route>
         <Route path={"/gallery"} element={<Gallery></Gallery>}></Route>
         <Route path={"/details"} element={<Details></Details>}></Route>
       </Routes>

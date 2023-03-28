@@ -7,7 +7,8 @@ import { UsersRepo } from "../../services/user.repo";
 import styles from "./login.module.scss";
 import { useToys } from "../../hooks/use.toys";
 import { ToysApiRepo } from "../../services/toys.api.repo";
-export function Login() {
+
+export default function Login() {
   const repoUsers = useMemo(() => new UsersRepo(), []);
   const repoToys = useMemo(() => new ToysApiRepo(), []);
   const { userLogin } = useUsers(repoUsers);
@@ -26,8 +27,8 @@ export function Login() {
     userLogin(loginForm);
     gallery();
   };
-
   navigate("/gallery");
+
   return (
     <div className={styles.login}>
       <h2>Login</h2>
@@ -52,5 +53,3 @@ export function Login() {
     </div>
   );
 }
-
-export default Login;

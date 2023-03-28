@@ -16,7 +16,7 @@ export const menuOptions: MenuOption[] = [
   { label: "Details", path: "/details" },
 ];
 
-export function App() {
+export default function App() {
   return (
     <>
       <div className="App">
@@ -30,4 +30,3 @@ export function App() {
     </>
   );
 }
-export default App;

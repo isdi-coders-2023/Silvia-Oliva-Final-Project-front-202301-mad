@@ -4,7 +4,8 @@ import { useUsers } from "../../hooks/use.users";
 import { UserStructure } from "../../model/user";
 import { UsersRepo } from "../../services/user.repo";
 import styles from "./register.module.scss";
-export function Register() {
+
+export default function Register() {
   const repo = useMemo(() => new UsersRepo(), []);
 
   const { userRegister } = useUsers(repo);
@@ -48,5 +49,3 @@ export function Register() {
     </div>
   );
 }
-
-export default Register;
