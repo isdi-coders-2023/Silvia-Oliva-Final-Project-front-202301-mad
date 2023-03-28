@@ -1,5 +1,6 @@
 import React from "react";
 import { AppRouter } from "../app.router/app.router";
+import Footer from "../footer/footer";
 import { Header } from "../header/header";
 import { Menu } from "../menu/menu";
 
@@ -15,7 +16,7 @@ export const menuOptions: MenuOption[] = [
   { label: "Details", path: "/details" },
 ];
 
-export function App() {
+export default function App() {
   return (
     <>
       <div className="App">
@@ -24,9 +25,8 @@ export function App() {
         </Header>
 
         <AppRouter menuOptions={menuOptions}></AppRouter>
-        <footer></footer>
+        <Footer></Footer>
       </div>
     </>
   );
 }
-export default App;

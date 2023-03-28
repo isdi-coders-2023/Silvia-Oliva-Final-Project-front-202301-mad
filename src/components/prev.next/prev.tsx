@@ -8,10 +8,8 @@ export function PrevNext() {
           src="../../../assets/card/flecha-gris"
           alt="previous"
         />
-        <h3 className="prev-text">Previous</h3>
       </button>
       <button className="next">
-        <h3 className="n-text">Next</h3>
         <img
           className="next_button"
           src="../../../assets/card/flecha-gris"
@@ -21,3 +19,4 @@ export function PrevNext() {
     </div>
   );
 }
+export default PrevNext;

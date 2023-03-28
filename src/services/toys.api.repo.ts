@@ -2,14 +2,14 @@ import { ToyServerResponse, ToyStructure } from "../model/toy";
 import { URL_AMIGURUMIS_USERS } from "../../src/variables";
 export interface ToysRepo<T> {
   query(token: string, extraUrl: string): Promise<T>;
-  queryId?(token: string, idToy: ToyStructure["id"]): Promise<T>;
+  queryId(token: string, idToy: ToyStructure["id"]): Promise<T>;
   create?(token: string, infoToy: Partial<ToyStructure>): Promise<T>;
   update?(
     token: string,
     idToy: ToyStructure["id"],
     infoToy: Partial<ToyStructure>
   ): Promise<T>;
-  delete?(token: string, idToy: ToyStructure["id"]): Promise<void>;
+  delete(token: string, idToy: ToyStructure["id"]): Promise<void>;
 }
 
 export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
@@ -34,6 +34,59 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
       throw new Error(
         "Error al traer la gallery por query: " + resp.status + resp.statusText
       );
+
+    const toyData = (await resp.json()) as ToyServerResponse;
+
+    return toyData;
+  }
+  async create(
+    token: string,
+    infoToy: Partial<ToyStructure>
+  ): Promise<ToyServerResponse> {
+    const url = this.url + "/create";
+
+    const resp = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(infoToy),
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+
+    const toyData = (await resp.json()) as ToyServerResponse;
+
+    return toyData;
+  }
+  async delete(token: string, idToy: string): Promise<void> {
+    const url = this.url + "/toys/" + idToy;
+
+    const resp = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+  }
+  async queryId(idToy: string): Promise<ToyServerResponse> {
+    const url = this.url + "/toys/" + idToy;
+    console.log(url);
+
+    const resp = await fetch(url, {
+      method: "GET",
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
 
     const toyData = (await resp.json()) as ToyServerResponse;
 
@@ -69,50 +122,6 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 //     return toysData;
 //   }
 
-//   async queryId(
-//     token: string,
-//     idToy: ToyStructure["id"]
-//   ): Promise<ToyServerResponse> {
-//     const url = this.url + "/details/" + idToy;
-
-//     const resp = await fetch(url, {
-//       method: "GET",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-
-//     const toyData = (await resp.json()) as ToyServerResponse;
-
-//     return toyData;
-//   }
-
-//   async create(
-//     token: string,
-//     infoToy: Partial<ToyStructure>
-//   ): Promise<ToyServerResponse> {
-//     const url = this.url + "/create";
-
-//     const resp = await fetch(url, {
-//       method: "POST",
-//       body: JSON.stringify(infoToy),
-//       headers: {
-//         Authorization: "Bearer " + token,
-//         "Content-type": "application/json",
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-
-//     const toyData = (await resp.json()) as ToyServerResponse;
-
-//     return toyData;
-//   }
-
 //   async update(
 //     token: string,
 //     idToy: ToyStructure["id"],
@@ -136,18 +145,3 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 
 //     return toyData;
 //   }
-
-//   async delete(token: string, idToy: ToyStructure["id"]): Promise<void> {
-//     const url = this.url + "/delete/" + idToy;
-
-//     const resp = await fetch(url, {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: "Bearer " + token,
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-//   }
-// }
