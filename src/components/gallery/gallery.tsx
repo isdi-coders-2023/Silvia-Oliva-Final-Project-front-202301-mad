@@ -15,9 +15,9 @@ export default function Gallery() {
 
   const handlerClick = (event: SyntheticEvent) => {
     const valueToDetail =
-      event.currentTarget.innerHTML === null
-        ? "156450"
-        : event.currentTarget.innerHTML;
+      event.currentTarget.ariaLabel === null
+        ? "1556"
+        : event.currentTarget.ariaLabel;
 
     loadOneToy(valueToDetail);
 
@@ -29,11 +29,13 @@ export default function Gallery() {
         <ul className="gallery__list">
           {galleryArray.map((item: Partial<ToyStructure>) => (
             <li key={item.id}>
-              <p onClick={handlerClick}>{item.id}</p>
-              <p>Nombre: {item.name}</p>
-              <p>Altura: {item.height}</p>
-              <p>Animal: {item.animalModel}</p>
-              <p>Descripción: {item.description}</p>
+              <div onClick={handlerClick} aria-label={item.id}>
+                <span>More details</span>
+              </div>
+              <div>Nombre: {item.name}</div>
+              <div>Altura: {item.height}</div>
+              <div>Animal: {item.animalModel}</div>
+              <div>Descripción: {item.description}</div>
               <img src={item.img} alt={item.description} />
             </li>
 

@@ -1,4 +1,7 @@
+import { SyntheticEvent, useMemo } from "react";
 import { useSelector } from "react-redux";
+import { useToys } from "../../hooks/use.toys";
+import { ToysApiRepo } from "../../services/toys.api.repo";
 // import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { ToyStructure } from "../../model/toy";
 import { RootState } from "../../store/store";
@@ -7,6 +10,17 @@ import styles from "./toy.details.module.scss";
 
 export default function ToyDetails() {
   const toyDetail = useSelector((state: RootState) => state.toys.toy);
+  const repoToys = useMemo(() => new ToysApiRepo(), []);
+  const { deleteOneToy } = useToys(repoToys);
+  const handlerClickDelete = (event: SyntheticEvent) => {
+    console.log("borrando");
+    const valueToDetail =
+      event.currentTarget.ariaLabel === null
+        ? "666"
+        : event.currentTarget.ariaLabel;
+
+    deleteOneToy(valueToDetail);
+  };
   // const location = useLocation();
   // const { toyProps } = location.state;
   // const toy: ToyStructure = toyProps;
@@ -70,11 +84,14 @@ export default function ToyDetails() {
 
         <div className={styles.toyDetailsBodyDescription}>
           <p className={styles.toyDetailsBodyDescriptionText}>
-            Description: {toyDetail.description} Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
+            Description: {toyDetail.description}
           </p>
         </div>
       </div>
+
+      <button onClick={handlerClickDelete} aria-label={toyDetail.id}>
+        📮
+      </button>
     </section>
   );
 }

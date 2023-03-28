@@ -9,8 +9,10 @@ import {
   deleteToy,
 } from "../reducer/toy.slice";
 import { ToyStructure } from "../model/toy";
+import { useNavigate } from "react-router-dom";
 
 export function useToys(repo: ToysApiRepo) {
+  const navigate = useNavigate();
   const users = useSelector((state: RootState) => state.users);
   const toyState = useSelector((state: RootState) => state.toys);
 
@@ -45,7 +47,7 @@ export function useToys(repo: ToysApiRepo) {
 
   const deleteOneToy = async (idToy: ToyStructure["id"]) => {
     try {
-      const userToken = users.userLogged.token;
+      const userToken = users.userLogged.id;
       if (!userToken) throw new Error("Not authorized");
 
       const toyId: string = idToy;
@@ -53,20 +55,22 @@ export function useToys(repo: ToysApiRepo) {
       await repo.delete(userToken, toyId);
 
       dispatch(deleteToy(toyId));
+      navigate("/gallery");
     } catch (error) {
       console.log((error as Error).message);
     }
   };
   const loadOneToy = async (idToy: ToyStructure["id"]) => {
     try {
-      const userToken = users.userLogged.token;
-      if (!userToken) throw new Error("Not authorized");
+      // const userToken = users.userLogged.token;
+      // if (!userToken) throw new Error("Not authorized");
 
-      const toyInfo = await repo.queryId(userToken, idToy);
+      const toyInfo = await repo.queryId(idToy);
+      console.log(toyInfo);
 
       dispatch(loadDetails(toyInfo.results[0]));
     } catch (error) {
-      console.log((error as Error).message);
+      // console.log((error as Error).message);
     }
   };
   return {

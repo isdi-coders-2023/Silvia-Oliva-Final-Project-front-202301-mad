@@ -21,8 +21,7 @@ export default function Home() {
         Register
       </button>
       <button onClick={() => handlerChange(true)}>Login</button>
-      <Login></Login>
-      <Register></Register>
+      {isInLogin ? <Login></Login> : <Register></Register>}
     </div>
   );
 }

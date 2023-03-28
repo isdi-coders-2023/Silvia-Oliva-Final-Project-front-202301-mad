@@ -2,14 +2,14 @@ import { ToyServerResponse, ToyStructure } from "../model/toy";
 import { URL_AMIGURUMIS_USERS } from "../../src/variables";
 export interface ToysRepo<T> {
   query(token: string, extraUrl: string): Promise<T>;
-  queryId?(token: string, idToy: ToyStructure["id"]): Promise<T>;
+  queryId(token: string, idToy: ToyStructure["id"]): Promise<T>;
   create?(token: string, infoToy: Partial<ToyStructure>): Promise<T>;
   update?(
     token: string,
     idToy: ToyStructure["id"],
     infoToy: Partial<ToyStructure>
   ): Promise<T>;
-  delete?(token: string, idToy: ToyStructure["id"]): Promise<void>;
+  delete(token: string, idToy: ToyStructure["id"]): Promise<void>;
 }
 
 export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
@@ -61,8 +61,8 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 
     return toyData;
   }
-  async delete(token: string, idToy: ToyStructure["id"]): Promise<void> {
-    const url = this.url + "/delete/" + idToy;
+  async delete(token: string, idToy: string): Promise<void> {
+    const url = this.url + "/toys/" + idToy;
 
     const resp = await fetch(url, {
       method: "DELETE",
@@ -74,17 +74,15 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
     if (!resp.ok)
       throw new Error("Error http: " + resp.status + resp.statusText);
   }
-  async queryId(
-    token: string,
-    idToy: ToyStructure["id"]
-  ): Promise<ToyServerResponse> {
-    const url = this.url + "/details/" + idToy;
+  async queryId(idToy: string): Promise<ToyServerResponse> {
+    const url = this.url + "/toys/" + idToy;
+    console.log(url);
 
     const resp = await fetch(url, {
       method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
+      // headers: {
+      //   Authorization: "Bearer " + token,
+      // },
     });
 
     if (!resp.ok)

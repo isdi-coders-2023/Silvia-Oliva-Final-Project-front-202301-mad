@@ -1,17 +1,24 @@
 .gallery {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
   h1 {
     display: flex;
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif;
   }
   ul {
+    list-style: none;
     li {
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
   }
-  p {
+  div {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    span:hover {
+      color: aqua;
+      font-weight: bold;
+    }
   }
   img {
     height: 15rem;
