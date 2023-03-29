@@ -1,27 +1,40 @@
 .gallery {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem 1rem 4rem;
+  background-color: #6d6875;
+  font-family: "Rye";
   h1 {
     display: flex;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      sans-serif;
+    font-family: "Rye";
   }
   ul {
     list-style: none;
     li {
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      display: flex;
     }
   }
   div {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
     span:hover {
-      color: aqua;
-      font-weight: bold;
+      color: #b5838d;
     }
+  }
+  .moreDetails {
+    font-weight: bolder;
   }
   img {
     height: 15rem;
     width: 15rem;
+  }
+  .containerDescription {
+    display: flex;
+    flex-direction: column;
   }
 }

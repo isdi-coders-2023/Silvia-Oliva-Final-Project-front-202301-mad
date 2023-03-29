@@ -3,6 +3,7 @@ export type ProtoToyStructure = {
   name: string;
   animalModel: string;
   height: string;
+  artist: string;
   description: string;
   img: string;
 };

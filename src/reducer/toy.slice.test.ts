@@ -16,20 +16,22 @@ export {};
 
 //     mockPayload = {
 //       id: "1",
-//       name: "test",
-//       animalModel: "test",
-//       height: "test",
-//       description: "test",
-//       img: "test",
+//       name: "test1",
+//       animalModel: "test1",
+//       height: "test1",
+//       artist: "test1",
+//       description: "test1",
+//       img: "test1",
 //     };
 
 //     mockToy = {
-//       id: "2",
-//       name: "test2",
-//       animalModel: "test2",
-//       height: "test2",
-//       description: "test2",
-//       img: "test2",
+//       id: "1",
+//       name: "test1",
+//       animalModel: "test1",
+//       height: "test1",
+//       artist: "test1",
+//       description: "test1",
+//       img: "test1",
 //     };
 //   });
 
@@ -89,44 +91,26 @@ export {};
 //           name: "test3",
 //           animalModel: "test3",
 //           height: "test3",
+//           artist: "test",
 //           description: "test3",
 //           img: "test3",
 //         },
 //       };
-//       const result = toyReducer(mockInitialState, mockUpdateAction);
-//       expect(result).toEqual({
-//         allToys: [
-//           {
-//             id: "3",
-//             name: "test3",
-//             animalModel: "test3",
-//             height: "test3",
-//             description: "test3",
-//             img: "test3",
-//           },
-//           mockToy,
-//         ],
-//         toy: {},
-//       });
-//     });
-//   });
-
-//   describe("When the deleteToy action is called", () => {
-//     test("Then, if the initial state allToys is an Array of mockPayload and mockToy, it should return the payload in the allToys property of the state", () => {
-//       mockInitialState = {
-//         allToys: [mockPayload, mockToy],
-//         toy: {} as ToyStructure,
-//       };
-
-//       const mockDeleteAction: PayloadAction<ToyStructure["id"]> = {
-//         type: "toy/deleteToy",
-//         payload: "3",
-//       };
-//       const result = toyReducer(mockInitialState, mockDeleteAction);
-//       expect(result).toEqual({
-//         allToys: [mockToy],
-//         toy: {},
-//       });
+//       //     const result = toyReducer(mockInitialState, mockUpdateAction);
+//       //     expect(result).toEqual({
+//       //       allToys: [
+//       //         {
+//       //           id: "3",
+//       //           name: "test3",
+//       //           animalModel: "test3",
+//       //           height: "test3",
+//       //           description: "test3",
+//       //           img: "test3",
+//       //         },
+//       //         mockToy,
+//       //       ],
+//       //       toy: {},
+//       //     });
 //     });
 //   });
 // });

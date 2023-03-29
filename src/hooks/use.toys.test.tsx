@@ -1,217 +1,205 @@
-export {};
-// /* eslint-disable testing-library/no-render-in-setup */
-// /* eslint-disable testing-library/no-unnecessary-act */
-// import { act, render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
-// import { Provider } from "react-redux";
-// import { ToyStructure } from "../model/toy";
-// import { ServerType, UserStructure } from "../model/user";
-// import { ToysApiRepo } from "../services/toys.api.repo";
-// import { UsersRepo } from "../services/user.repo";
-// import { store } from "../store/store";
-// import { useToys } from "./use.toys";
-// import { useUsers } from "./use.users";
+/* eslint-disable testing-library/no-render-in-setup */
+/* eslint-disable testing-library/no-unnecessary-act */
+import { act, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
 
-// describe("Given the useToys Custom Hook, a ToyApiRepo mock and a TestToyComponent", () => {
-//   let mockToyRepo: ToysApiRepo;
-//   let mockToyPayload: ToyStructure;
+import { ServerType, UserStructure } from "../model/user";
+import { ToysApiRepo } from "../services/toys.api.repo";
+import { UsersRepo } from "../services/user.repo";
+import { store } from "../store/store";
+import { useToys } from "./use.toys";
+import { useUsers } from "./use.users";
 
-//   let mockUserRepo: UsersRepo;
-//   let mockUserPayload: UserStructure;
-//   let mockUserResponse: ServerType;
-//   let mockUserResponseFalse: ServerType;
+describe("Given the useToys Custom Hook, a ToyApiRepo mock and a TestToyComponent", () => {
+  let mockToyRepo: ToysApiRepo;
 
-//   let falseToken: () => void;
-//   let trueToken: () => void;
+  let mockUserRepo: UsersRepo;
+  let mockUserPayload: UserStructure;
+  let mockUserResponse: ServerType;
+  let mockUserResponseFalse: ServerType;
 
-//   beforeEach(async () => {
-//     mockToyRepo = {
-//       loadGallery: jest.fn(),
-//       loadDetails: jest.fn(),
-//       createToy: jest.fn(),
-//       updateToy: jest.fn(),
-//       deleteOneToy: jest.fn(),
-//     } as unknown as ToysApiRepo;
+  let falseToken: () => void;
+  let trueToken: () => void;
 
-//     mockToyPayload = {
-//       id: "1",
-//       name: "test",
-//       animalModel: "test",
-//       height: "test",
-//       description: "test",
-//       img: "test",
-//     } as unknown as ToyStructure;
+  beforeEach(async () => {
+    mockToyRepo = {
+      loadGallery: jest.fn(),
+      loadDetails: jest.fn(),
+      createToy: jest.fn(),
+      updateToy: jest.fn(),
+      deleteOneToy: jest.fn(),
+    } as unknown as ToysApiRepo;
 
-//     mockUserPayload = {
-//       email: "test",
-//       id: "1",
-//       token: "test",
-//     } as unknown as UserStructure;
+    mockUserPayload = {
+      email: "test",
+      id: "1",
+      token: "test",
+    } as unknown as UserStructure;
 
-//     mockUserResponse = {
-//       results: [mockUserPayload],
-//     } as unknown as ServerType;
+    mockUserResponse = {
+      results: [mockUserPayload],
+    } as unknown as ServerType;
 
-//     mockUserResponseFalse = {
-//       results: [
-//         {
-//           email: "test",
-//           id: "1",
-//         },
-//       ],
-//     } as unknown as ServerType;
+    mockUserResponseFalse = {
+      results: [
+        {
+          email: "test",
+          id: "1",
+        },
+      ],
+    } as unknown as ServerType;
 
-//     mockUserRepo = {
-//       create: jest.fn(),
-//     } as unknown as UsersRepo;
+    mockUserRepo = {
+      create: jest.fn(),
+    } as unknown as UsersRepo;
 
-//     trueToken = () => {
-//       (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-//         mockUserResponse
-//       );
-//     };
+    trueToken = () => {
+      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
+        mockUserResponse
+      );
+    };
 
-//     falseToken = () => {
-//       (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-//         mockUserResponseFalse
-//       );
-//     };
+    falseToken = () => {
+      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
+        mockUserResponseFalse
+      );
+    };
 
-//     const TestToyComponent = function () {
-//       const { userLogin } = useUsers(mockUserRepo);
-//       const { loadGallery, loadDetails, createToy, updateToy, deleteOneToy } =
-//         useToys(mockToyRepo);
+    const TestToyComponent = function () {
+      const { userLogin } = useUsers(mockUserRepo);
+      const { deleteOneToy } = useToys(mockToyRepo);
 
-//       return (
-//         <>
-//           <button onClick={() => userLogin(mockUserPayload)}>login</button>
-//           <button onClick={() => loadGallery()}>loadToys</button>
-//           <button onClick={() => loadDetails()}>loadToys</button>
-//           <button onClick={() => loadOneToy("mockIdToy")}>loadOneToy</button>
-//           <button onClick={() => createToy(mockToyPayload)}>createToy</button>
-//           <button onClick={() => updateToy("mockIdToy", mockToyPayload)}>
-//             updateToy
-//           </button>
-//           <button onClick={() => deleteOneToy("mockIdToy")}>
-//             deleteOneToy
-//           </button>
-//         </>
-//       );
-//     };
+      function loadOneToy(arg0: string): void {
+        throw new Error("Function not implemented.");
+      }
 
-//     await act(async () =>
-//       render(
-//         <Provider store={store}>
-//           <TestToyComponent></TestToyComponent>
-//         </Provider>
-//       )
-//     );
-//   });
+      return (
+        <>
+          <button onClick={() => userLogin(mockUserPayload)}>login</button>
 
-//   describe("When the TestToyComponent is rendered", () => {
-//     test("Then, the button should be in the document", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       expect(elements[0]).toBeInTheDocument();
-//     });
-//   });
+          <button onClick={() => loadOneToy("mockIdToy")}>loadOneToy</button>
 
-//   describe("When the TestToyComponent is rendered and the loadToys button is clicked", () => {
-//     test("Then, if there is userToken, the query toy repo method should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       trueToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[1]));
+          <button onClick={() => deleteOneToy("mockIdToy")}>
+            deleteOneToy
+          </button>
+        </>
+      );
+    };
 
-//       expect(mockToyRepo.query).toHaveBeenCalled();
-//     });
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <TestToyComponent></TestToyComponent>
+        </Provider>
+      )
+    );
+  });
 
-//     test("Then, if there is no userToken, the query toy repo should NOT been called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       falseToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[1]));
+  describe("When the TestToyComponent is rendered", () => {
+    test("Then, the button should be in the document", async () => {
+      const elements = await screen.findAllByRole("button");
+      expect(elements[0]).toBeInTheDocument();
+    });
+  });
 
-//       expect(mockToyRepo.query).not.toHaveBeenCalled();
-//     });
-//   });
+  describe("When the TestToyComponent is rendered and the loadToys button is clicked", () => {
+    test("Then, if there is userToken, the query toy repo method should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[1]));
 
-//   describe("When the TestToyComponent is rendered and the loadOneToys button is clicked", () => {
-//     test("Then, if there is userToken, the queryId toy repo method should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       trueToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[2]));
+      expect(mockToyRepo.query).toHaveBeenCalled();
+    });
 
-//       expect(mockToyRepo.queryId).toHaveBeenCalled();
-//     });
+    test("Then, if there is no userToken, the query toy repo should NOT been called", async () => {
+      const elements = await screen.findAllByRole("button");
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[1]));
 
-//     test("Then, if there is no userToken, the queryId toy repo should NOT been called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       falseToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[2]));
+      expect(mockToyRepo.query).not.toHaveBeenCalled();
+    });
+  });
 
-//       expect(mockToyRepo.queryId).not.toHaveBeenCalled();
-//     });
-//   });
+  describe("When the TestToyComponent is rendered and the loadOneToys button is clicked", () => {
+    test("Then, if there is userToken, the queryId toy repo method should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[2]));
 
-//   describe("When the TestGuitarComponent is rendered and the createGuitar button is clicked", () => {
-//     test("Then, if there is userToken, the create toy repo method should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       trueToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[3]));
+      expect(mockToyRepo.queryId).toHaveBeenCalled();
+    });
 
-//       expect(mockToyRepo.create).toHaveBeenCalled();
-//     });
+    test("Then, if there is no userToken, the queryId toy repo should NOT been called", async () => {
+      const elements = await screen.findAllByRole("button");
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[2]));
 
-//     test("Then, if there is no userToken, the create toy repo should NOT been called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       falseToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[3]));
+      expect(mockToyRepo.queryId).not.toHaveBeenCalled();
+    });
+  });
 
-//       expect(mockToyRepo.create).not.toHaveBeenCalled();
-//     });
-//   });
+  describe("When the TestGuitarComponent is rendered and the createGuitar button is clicked", () => {
+    test("Then, if there is userToken, the create toy repo method should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[3]));
 
-//   describe("When the TestGuitarComponent is rendered and the updateGuitar button is clicked", () => {
-//     test("Then, if there is userToken, the update toy repo method should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       trueToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[4]));
+      expect(mockToyRepo.create).toHaveBeenCalled();
+    });
 
-//       expect(mockToyRepo.update).toHaveBeenCalled();
-//     });
+    test("Then, if there is no userToken, the create toy repo should NOT been called", async () => {
+      const elements = await screen.findAllByRole("button");
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[3]));
 
-//     test("Then, if there is no userToken, the update toy repo should NOT been called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       falseToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[4]));
+      expect(mockToyRepo.create).not.toHaveBeenCalled();
+    });
+  });
 
-//       expect(mockToyRepo.update).not.toHaveBeenCalled();
-//     });
-//   });
+  describe("When the TestGuitarComponent is rendered and the updateGuitar button is clicked", () => {
+    test("Then, if there is userToken, the update toy repo method should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[4]));
 
-//   describe("When the TestGuitarComponent is rendered and the deleteOneGuitar button is clicked", () => {
-//     test("Then, if there is userToken, the delete toy repo method should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       trueToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[5]));
+      expect(mockToyRepo.update).toHaveBeenCalled();
+    });
 
-//       expect(mockToyRepo.delete).toHaveBeenCalled();
-//     });
+    test("Then, if there is no userToken, the update toy repo should NOT been called", async () => {
+      const elements = await screen.findAllByRole("button");
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[4]));
 
-//     test("Then, if there is no userToken, the delete toy repo should NOT been called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       falseToken();
-//       await act(async () => userEvent.click(elements[0]));
-//       await act(async () => userEvent.click(elements[5]));
+      expect(mockToyRepo.update).not.toHaveBeenCalled();
+    });
+  });
 
-//       expect(mockToyRepo.delete).not.toHaveBeenCalled();
-//     });
-//   });
-// });
+  describe("When the TestGuitarComponent is rendered and the deleteOneGuitar button is clicked", () => {
+    test("Then, if there is userToken, the delete toy repo method should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[5]));
+
+      expect(mockToyRepo.delete).toHaveBeenCalled();
+    });
+
+    test("Then, if there is no userToken, the delete toy repo should NOT been called", async () => {
+      const elements = await screen.findAllByRole("button");
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[5]));
+
+      expect(mockToyRepo.delete).not.toHaveBeenCalled();
+    });
+  });
+});
