@@ -1,13 +1,7 @@
 import { AppDispatch, RootState } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { ToysApiRepo } from "../services/toys.api.repo";
-import {
-  loadGallery,
-  loadDetails,
-  create,
-  // update,
-  deleteToy,
-} from "../reducer/toy.slice";
+import { loadGallery, loadDetails, deleteToy } from "../reducer/toy.slice";
 import { ToyStructure } from "../model/toy";
 import { useNavigate } from "react-router-dom";
 
@@ -19,29 +13,12 @@ export function useToys(repo: ToysApiRepo) {
   const dispatch = useDispatch<AppDispatch>();
   const tokenAtState = users.token;
   const gallery = async () => {
-    const serverResponse: any = await repo.query(
-      // userState.userLoggedToken,
-      tokenAtState,
-      "toys/all"
-    );
+    const serverResponse: any = await repo.query(tokenAtState, "toys/all");
 
     try {
       await dispatch(loadGallery(serverResponse.results));
     } catch (error) {
       console.error((error as Error).message);
-    }
-  };
-
-  const createToy = async (infoToy: Partial<ToyStructure>) => {
-    try {
-      const userToken = users.userLogged.token;
-      if (!userToken) throw new Error("Not authorized");
-
-      const toyInfo = await repo.create(userToken, infoToy);
-
-      dispatch(create(toyInfo.results[0]));
-    } catch (error) {
-      console.log((error as Error).message);
     }
   };
 
@@ -62,66 +39,18 @@ export function useToys(repo: ToysApiRepo) {
   };
   const loadOneToy = async (idToy: ToyStructure["id"]) => {
     try {
-      // const userToken = users.userLogged.token;
-      // if (!userToken) throw new Error("Not authorized");
-
       const toyInfo = await repo.queryId(idToy);
       console.log(toyInfo);
 
       dispatch(loadDetails(toyInfo.results[0]));
-    } catch (error) {
-      // console.log((error as Error).message);
-    }
+    } catch (error) {}
   };
   return {
     toyState,
     gallery,
     loadGallery,
     loadDetails,
-    createToy,
     deleteOneToy,
     loadOneToy,
   };
 }
-
-// const loadToys = useCallback(
-//   async (pageChange: number = 0, style: string = "All") => {
-//     try {
-//       const userToken = usersState.userLogged.token;
-//       if (!userToken) throw new Error("Not authorized");
-
-//       const toysInfo = await repo.query(userToken, pageChange, style);
-
-//       dispatch(loadGallery(toysInfo.results));
-//     } catch (error) {
-//       console.log((error as Error).message);
-//     }
-//   },
-//   [dispatch, repo, usersState.userLogged.token]
-// );
-
-// const updateToy = async (
-//   idToy: ToyStructure["id"],
-//   infoToy: Partial<ToyStructure>
-// ) => {
-//   try {
-//     const userToken = usersState.userLogged.token;
-//     if (!userToken) throw new Error("Not authorized");
-
-//     const toyInfo = await repo.update(userToken, idToy, infoToy);
-
-//     dispatch(update(toyInfo.results[0]));
-//   } catch (error) {
-//     console.log((error as Error).message);
-//   }
-// };
-
-//   return {
-//     toysState,
-//     loadToys,
-//     loadOneToy,
-//     createToy,
-//     updateToy,
-//     deleteOneToy,
-//   };
-// }

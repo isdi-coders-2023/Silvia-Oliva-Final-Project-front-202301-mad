@@ -20,7 +20,6 @@ export default function Gallery() {
         : event.currentTarget.ariaLabel;
 
     loadOneToy(valueToDetail);
-
     navigate("/details");
   };
   return (
@@ -29,16 +28,26 @@ export default function Gallery() {
         <ul className="gallery__list">
           {galleryArray.map((item: Partial<ToyStructure>) => (
             <li key={item.id}>
-              <div onClick={handlerClick} aria-label={item.id}>
-                <span>More details</span>
+              <div className={styles.superContainer}>
+                <div>
+                  <div className={styles.containerDescription}>
+                    <p>Nombre: {item.name}</p>
+                    <p>Altura: {item.height}</p>
+                    <p>Animal: {item.animalModel}</p>
+                    <p>Artist: {item.artist}</p>
+                    <p>
+                      Descripción: {item.description}
+                      <div onClick={handlerClick} aria-label={item.id}>
+                        <span className={styles.moreDetails}>More details</span>
+                      </div>
+                    </p>
+                  </div>
+                </div>
+                <div className={styles.containerImg}>
+                  <img src={item.img} alt={item.description} />
+                </div>
               </div>
-              <div>Nombre: {item.name}</div>
-              <div>Altura: {item.height}</div>
-              <div>Animal: {item.animalModel}</div>
-              <div>Descripción: {item.description}</div>
-              <img src={item.img} alt={item.description} />
             </li>
-
             // <Card key={item.id} toy={item}></Card>
           ))}
         </ul>

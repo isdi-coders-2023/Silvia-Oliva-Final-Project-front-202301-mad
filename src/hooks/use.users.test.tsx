@@ -1,72 +1,71 @@
-export {};
-// /* eslint-disable testing-library/no-unnecessary-act */
-// /* eslint-disable testing-library/no-render-in-setup */
-// import { act, fireEvent, render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
-// import React from "react";
-// import { Provider } from "react-redux";
-// import { UserStructure } from "../model/user";
-// import { UsersRepo } from "../services/user.repo";
-// import { store } from "../store/store";
-// import { useUsers } from "./use.users";
+/* eslint-disable testing-library/no-unnecessary-act */
+/* eslint-disable testing-library/no-render-in-setup */
+import { act, fireEvent, render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-// describe("Given the useUsers hook", () => {
-//   let mockPayload: UserStructure;
-//   let mockRepo: UsersRepo;
+import { Provider } from "react-redux";
+import { UserStructure } from "../model/user";
+import { UsersRepo } from "../services/user.repo";
+import { store } from "../store/store";
+import { useUsers } from "./use.users";
 
-//   beforeEach(async () => {
-//     mockPayload = {
-//       email: "test",
-//     } as unknown as UserStructure;
+describe("Given the useUsers hook", () => {
+  let mockPayload: UserStructure;
+  let mockRepo: UsersRepo;
 
-//     mockRepo = {
-//       create: jest.fn(),
-//     } as unknown as UsersRepo;
+  beforeEach(async () => {
+    mockPayload = {
+      email: "test",
+    } as unknown as UserStructure;
 
-//     mockRepo = {
-//       login: jest.fn(),
-//     } as unknown as UsersRepo;
+    mockRepo = {
+      create: jest.fn(),
+    } as unknown as UsersRepo;
 
-//     const TestComponent = function () {
-//       const { userRegister, userLogin } = useUsers(mockRepo);
+    mockRepo = {
+      login: jest.fn(),
+    } as unknown as UsersRepo;
 
-//       return (
-//         <>
-//           <button onClick={() => userRegister(mockPayload)}>register</button>
-//           <button onClick={() => userLogin(mockPayload)}>login</button>
-//         </>
-//       );
-//     };
+    const TestComponent = function () {
+      const { userRegister, userLogin } = useUsers(mockRepo);
 
-//     await act(async () =>
-//       render(
-//         <Provider store={store}>
-//           <TestComponent></TestComponent>
-//         </Provider>
-//       )
-//     );
-//   });
+      return (
+        <>
+          <button onClick={() => userRegister(mockPayload)}>register</button>
+          <button onClick={() => userLogin(mockPayload)}>login</button>
+        </>
+      );
+    };
 
-//   describe("when the TestComponent is rendered", () => {
-//     test("then the buttons should be in the document", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       expect(elements[0]).toBeInTheDocument();
-//       expect(elements[1]).toBeInTheDocument();
-//     });
-//   });
-//   describe("when the REGISTER button of TestComponent is called", () => {
-//     test("should call userRegister when the REGISTER button is clicked", () => {
-//       const mockUserRegister = jest.fn();
-//       render((userRegister = { mockUserRegister }));
-//       fireEvent.click(screen.getByRole("button", { name: "REGISTER" }));
-//       expect(mockUserRegister).toHaveBeenCalled();
-//     });
-//   });
-//   describe("when the LOGIN button of TestComponent is called", () => {
-//     test("then the userLogin should be called", async () => {
-//       const elements = await screen.findAllByRole("button");
-//       await act(async () => userEvent.click(elements[1]));
-//       expect(mockRepo.login).toHaveBeenCalled();
-//     });
-//   });
-// });
+    await act(async () =>
+      render(
+        <Provider store={store}>
+          <TestComponent></TestComponent>
+        </Provider>
+      )
+    );
+  });
+
+  describe("when the TestComponent is rendered", () => {
+    test("then the buttons should be in the document", async () => {
+      const elements = await screen.findAllByRole("button");
+      expect(elements[0]).toBeInTheDocument();
+      expect(elements[1]).toBeInTheDocument();
+    });
+  });
+  // describe("when the REGISTER button of TestComponent is called", () => {
+  //   test("should call userRegister when the REGISTER button is clicked", () => {
+  //     const mockUserRegister = jest.fn();
+  //     render((userRegister = { mockUserRegister }));
+  //     fireEvent.click(screen.getByRole("button", { name: "REGISTER" }));
+  //     expect(mockUserRegister).toHaveBeenCalled();
+  //   });
+  // });
+  describe("when the LOGIN button of TestComponent is called", () => {
+    test("then the userLogin should be called", async () => {
+      const elements = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(elements[1]));
+      expect(mockRepo.login).toHaveBeenCalled();
+    });
+  });
+});

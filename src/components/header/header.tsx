@@ -9,7 +9,7 @@ export function Header({ children }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className="header__userLoggedInitial">{email}</div>
-      <div>
+      <div className={styles.container}>
         <h1 className={styles.tittle}>Amigurumis</h1>
         {children}
         <img

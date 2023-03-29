@@ -4,7 +4,7 @@ export interface ToysRepo<T> {
   query(token: string, extraUrl: string): Promise<T>;
   queryId(token: string, idToy: ToyStructure["id"]): Promise<T>;
   create?(token: string, infoToy: Partial<ToyStructure>): Promise<T>;
-  update?(
+  update(
     token: string,
     idToy: ToyStructure["id"],
     infoToy: Partial<ToyStructure>
@@ -14,11 +14,9 @@ export interface ToysRepo<T> {
 
 export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
   url: string;
-  //actualPage: number;
 
   constructor() {
     this.url = URL_AMIGURUMIS_USERS;
-    // this.actualPage = 1;
   }
   async query(token: string, extraUrl: string): Promise<ToyServerResponse> {
     const url = this.url + "/toys/all";
@@ -43,13 +41,13 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
     token: string,
     infoToy: Partial<ToyStructure>
   ): Promise<ToyServerResponse> {
-    const url = this.url + "/create";
-
+    const url = this.url + "/toys/add";
+    console.log(url);
     const resp = await fetch(url, {
       method: "POST",
       body: JSON.stringify(infoToy),
       headers: {
-        Authorization: "Bearer " + token,
+        // Authorization: "Bearer " + token,
         "Content-type": "application/json",
       },
     });
@@ -92,6 +90,29 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 
     return toyData;
   }
+  async update(
+    token: string,
+    idToy: ToyStructure["id"],
+    infoToy: Partial<ToyStructure>
+  ): Promise<ToyServerResponse> {
+    const url = this.url + "/change/" + idToy;
+
+    const resp = await fetch(url, {
+      method: "PATCH",
+      body: JSON.stringify(infoToy),
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!resp.ok)
+      throw new Error("Error http: " + resp.status + resp.statusText);
+
+    const toyData = (await resp.json()) as ToyServerResponse;
+
+    return toyData;
+  }
 }
 
 //   async query(
@@ -120,28 +141,4 @@ export class ToysApiRepo implements ToysRepo<ToyServerResponse> {
 //     const toysData = (await resp.json()) as ToyServerResponse;
 
 //     return toysData;
-//   }
-
-//   async update(
-//     token: string,
-//     idToy: ToyStructure["id"],
-//     infoToy: Partial<ToyStructure>
-//   ): Promise<ToyServerResponse> {
-//     const url = this.url + "/change/" + idToy;
-
-//     const resp = await fetch(url, {
-//       method: "PATCH",
-//       body: JSON.stringify(infoToy),
-//       headers: {
-//         Authorization: "Bearer " + token,
-//         "Content-type": "application/json",
-//       },
-//     });
-
-//     if (!resp.ok)
-//       throw new Error("Error http: " + resp.status + resp.statusText);
-
-//     const toyData = (await resp.json()) as ToyServerResponse;
-
-//     return toyData;
 //   }
